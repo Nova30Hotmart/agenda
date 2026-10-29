@@ -42,6 +42,7 @@ export default async function handler(req, res) {
       project: clean(d.project, 80),
       country: clean(d.country, 40),
       bio: clean(d.bio, 220),
+      challenge: clean(d.challenge, 200),
       help: clean(d.help, 140),
       photo,
       updated: new Date().toISOString()

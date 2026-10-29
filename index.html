@@ -183,6 +183,8 @@ main{min-height:70vh}
 .person h3{font-family:var(--font-display);font-size:19px;line-height:1.2;margin-top:6px}
 .person .meta{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;font-size:12.5px;color:var(--faint)}
 .person p.bio{font-size:14px;color:var(--dim);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.9em}
+.person .chal{font-size:12.5px;color:var(--dim);background:rgba(255,64,0,.07);border:1px solid rgba(255,64,0,.22);border-radius:10px;padding:8px 10px;width:100%;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.person .chal span{display:block;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:2px}
 .person .go{margin-top:2px;font-size:13.5px;font-weight:700;color:var(--orange);display:inline-flex;gap:6px;align-items:center}
 .tag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--line2);color:var(--dim)}
 .tag.sp{border-color:rgba(255,64,0,.5);color:#ffb59a;background:rgba(255,64,0,.08)}
@@ -419,7 +421,7 @@ footer img{height:18px;width:auto}
 
   <label class="search"><span class="sr">Buscar por nombre</span>
     <svg><use href="#i-search"/></svg>
-    <input class="in" id="q" type="search" placeholder="Buscar por nombre, proyecto o país" autocomplete="off">
+    <input class="in" id="q" type="search" placeholder="Buscar por nombre, país, desafío o en qué ayuda" autocomplete="off">
   </label>
 
 
@@ -535,7 +537,7 @@ footer img{height:18px;width:auto}
     <span class="ic"><svg><use href="#i-slides"/></svg></span>
     <div>
       <h2>Slides de las ponencias</h2>
-      <p class="muted" style="margin-top:6px">Las vamos subiendo conforme termina cada speaker.</p>
+      <p class="muted" style="margin-top:6px">Estarán disponibles en esta carpeta al final del día.</p>
     </div>
     <a class="btn lg" id="slidesLink" target="_blank" rel="noopener" href="#">Ver presentaciones <svg width="16" height="16" style="margin-left:6px"><use href="#i-ext"/></svg></a>
   </div>
@@ -605,6 +607,12 @@ footer img{height:18px;width:auto}
           <span class="count" data-for="f-bio"></span>
         </div>
         <div class="field">
+          <label for="f-chal">¿Qué desafío tienes hoy en tu negocio?</label>
+          <textarea class="ta" id="f-chal" maxlength="200" placeholder="Ej.: escalar mi equipo de ventas, bajar el costo de la pauta, lanzar un evergreen…" style="min-height:80px"></textarea>
+          <span class="count" data-for="f-chal"></span>
+          <small>Lo verán los demás para saber en qué te pueden ayudar.</small>
+        </div>
+        <div class="field">
           <label for="f-help">¿En qué puedes ayudar a otros?</label>
           <input class="in" id="f-help" type="text" maxlength="140" placeholder="Ej.: lanzamientos, pauta en Meta, equipos de ventas…">
           <small>Opcional. Lo usaremos para sugerirte conexiones.</small>
@@ -659,7 +667,7 @@ footer img{height:18px;width:auto}
 const CONFIG = {
   API_URL: location.protocol === "file:" || location.hostname === "localhost" ? "" : "/api", // vacío = modo demo local
   IG_URL: "/api/instagram", // función con el token de Meta (Business Discovery)
-  SLIDES_URL: "",           // carpeta de Drive con las presentaciones
+  SLIDES_URL: "https://drive.google.com/drive/folders/1EAQFjA9TRYIIb75j6VCcXNwVNwpbSsKf", // carpeta de Drive con las presentaciones
   PHOTOS: {                 // carpetas de Drive por día
     "2026-10-29": "https://drive.google.com/drive/folders/1m4KPd_7dEipovBfmTcwWyNGesuuYbdlp",
     "2026-10-30": "https://drive.google.com/drive/folders/1tLfDErKKkT52cxvT5ylDH5hVeQHZQCNn",
@@ -866,7 +874,7 @@ function allPeople(){
 }
 function match(p, q){
   if (!q) return true;
-  const h = [p.name,p.project,p.country,p.ig,p.bio].join(" ").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+  const h = [p.name,p.project,p.country,p.ig,p.bio,p.challenge,p.help].join(" ").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
   return h.includes(q);
 }
 function card(p){
@@ -876,6 +884,7 @@ function card(p){
     <h3>${esc(p.name)}</h3>
     <div class="meta">${p.country ? `<span>${flag(p.country)} ${esc(p.country)}</span>` : ""}</div>
     <p class="bio">${esc(p.bio || p.project || "")}</p>
+    ${p.challenge ? `<p class="chal"><span>Desafío</span>${esc(p.challenge)}</p>` : ""}
     <span class="go">Ver perfil <svg width="14" height="14"><use href="#i-arrow"/></svg></span>
   </article>`;
 }
@@ -907,6 +916,7 @@ function openPerson(id){
     </div></div>
     ${p.project ? `<div class="sec"><p class="label">Proyecto</p><p>${esc(p.project)}</p></div>` : ""}
     ${p.bio ? `<div class="sec"><p class="label">Bio</p><p>${esc(p.bio)}</p></div>` : ""}
+    ${p.challenge ? `<div class="sec"><p class="label">Su desafío hoy</p><p>${esc(p.challenge)}</p></div>` : ""}
     ${p.help ? `<div class="sec"><p class="label">Puede ayudarte con</p><p>${esc(p.help)}</p></div>` : ""}
     <div class="acts">
       ${p.ig ? `<a class="btn" href="https://instagram.com/${encodeURIComponent(p.ig)}" target="_blank" rel="noopener">Ver Instagram</a>` : ""}
@@ -1034,13 +1044,13 @@ $("#f-country").innerHTML = `<option value="">Elige tu país</option>` + COUNTRI
 function fillForm(){
   $("#f-ig").value = DRAFT.ig || ""; $("#f-name").value = DRAFT.name || ""; $("#f-proj").value = DRAFT.project || "";
   $("#f-country").value = DRAFT.country || ""; $("#f-bio").value = DRAFT.bio || "";
-  $("#f-help").value = DRAFT.help || ""; $("#f-mail").value = DRAFT.email || ""; syncDraft();
+  $("#f-help").value = DRAFT.help || ""; $("#f-chal").value = DRAFT.challenge || ""; $("#f-mail").value = DRAFT.email || ""; syncDraft();
 }
 function syncDraft(){
   DRAFT.ig = $("#f-ig").value.trim().replace(/^@/,"").replace(/^https?:\/\/(www\.)?instagram\.com\//i,"").replace(/[/?#].*$/,"");
   DRAFT.name = $("#f-name").value.trim(); DRAFT.project = $("#f-proj").value.trim();
   DRAFT.country = $("#f-country").value; 
-  DRAFT.bio = $("#f-bio").value.trim(); DRAFT.help = $("#f-help").value.trim(); DRAFT.email = $("#f-mail").value.trim().toLowerCase();
+  DRAFT.bio = $("#f-bio").value.trim(); DRAFT.help = $("#f-help").value.trim(); DRAFT.challenge = $("#f-chal").value.trim(); DRAFT.email = $("#f-mail").value.trim().toLowerCase();
   $("#f-av").innerHTML = DRAFT.photo ? `<img src="${esc(DRAFT.photo)}" alt="">` : esc(initials(DRAFT.name || "Tú"));
   $("#f-rm").hidden = !DRAFT.photo;
   $$(".count").forEach(c => { const el = document.getElementById(c.dataset.for); c.textContent = `${el.value.length}/${el.maxLength}`; });
