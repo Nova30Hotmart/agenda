@@ -96,10 +96,10 @@ td.m{color:var(--dim);max-width:280px}
   <form id="gform">
     <p class="label">Panel privado</p>
     <h1>Paddock · Titanium × NOVA 30</h1>
-    <label for="gkey" style="font-size:13px;font-weight:700">Llave de acceso</label>
+    <label for="gkey" style="font-size:13px;font-weight:700">Contraseña</label>
     <input id="gkey" type="password" autocomplete="current-password">
     <button class="btn" type="submit">Entrar al panel</button>
-    <p class="err" id="gerr" hidden>Llave incorrecta.</p>
+    <p class="err" id="gerr" hidden>Contraseña incorrecta.</p>
   </form>
 </div>
 
@@ -188,7 +188,7 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt
 const fmt1 = n => (Math.round(n * 10) / 10).toFixed(1);
 let KEY = "", P = [], E = [], CTAB = "take";
 
-function getKey(){ try{ return new URLSearchParams(location.search).get("key") || sessionStorage.getItem("pd_admin") || ""; }catch(e){ return ""; } }
+function getKey(){ try{ return sessionStorage.getItem("pd_admin") || ""; }catch(e){ return ""; } }
 async function api(t){
   const r = await fetch(`/api/export?key=${encodeURIComponent(KEY)}&t=${t}&f=json`, { cache:"no-store" });
   if (r.status === 401) throw new Error("401");
@@ -203,7 +203,7 @@ async function load(){
     render();
     $("#upd").textContent = "Actualizado " + new Date().toLocaleTimeString("es-MX", { hour:"2-digit", minute:"2-digit" });
   }catch(e){
-    if (e.message === "401"){ $("#app").hidden = true; $("#gate").hidden = false; if (KEY) $("#gerr").hidden = false; }
+    if (e.message === "401"){ try{ sessionStorage.removeItem("pd_admin"); }catch(x){} $("#app").hidden = true; $("#gate").hidden = false; if (KEY) $("#gerr").hidden = false; KEY = ""; }
     else $("#upd").textContent = "Sin conexión, reintentando…";
   }
 }
@@ -290,7 +290,7 @@ KEY = getKey();
 $("#dlP").addEventListener("click", e => { e.preventDefault(); location.href = `/api/export?key=${encodeURIComponent(KEY)}`; });
 $("#dlE").addEventListener("click", e => { e.preventDefault(); location.href = `/api/export?key=${encodeURIComponent(KEY)}&t=evals`; });
 if (KEY) load(); else $("#gate").hidden = false;
-if (new URLSearchParams(location.search).get("key")) history.replaceState(null, "", location.pathname);
+if (location.search) history.replaceState(null, "", location.pathname);
 setInterval(() => { if (!$("#app").hidden) load(); }, 60000);
 </script>
 </body>
