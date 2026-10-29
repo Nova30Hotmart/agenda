@@ -401,7 +401,7 @@ footer img{height:18px;width:auto}
     </div>
     <div class="field">
       <label for="e-best">¿Qué te llevas para aplicar en tu negocio?</label>
-      <textarea class="ta" id="e-best" maxlength="500" placeholder="Ej.: voy a revisar mi flujo de caja con lo que contó Steven…"></textarea>
+      <textarea class="ta" id="e-best" maxlength="500" placeholder="Ej.: voy a probar la estrategia de leads que contó Alberto…"></textarea>
     </div>
     <div class="field">
       <label for="e-better">¿Qué mejorarías para el próximo encuentro?</label>
@@ -571,16 +571,17 @@ const CONFIG = {
 
 /* ===================== DATOS DEL EVENTO ===================== */
 const SPEAKERS = [
-  { id:"steven-zamora", n:"Steven Zamora", rol:"Experto en gestión financiera", c:"Colombia",
+  { id:"steven-zamora", n:"Steven Zamora", rol:"Experto en gestión financiera", c:"Colombia", tema:"Lanzamiento Launchpad · con Paula Lopes",
     bio:"Experto en gestión financiera con cerca de 10 años de experiencia en el mercado." },
   { id:"santiago-castaneda", n:"Santiago Castañeda", rol:"Fundador de Upccelerator", c:"Colombia",
-    bio:"Fundador de Upccelerator, aceleradora con más de USD 5 millones generados y dos años en el top 10 de agencias de Latinoamérica en los Hotmart Awards." },
+    bio:"Empresario, estratega de crecimiento y fundador de Upccelerator, aceleradora que ha generado más de USD 5 millones en facturación y que dos años seguidos estuvo entre las diez mejores agencias de Latinoamérica en los Hotmart Awards. Ayuda a expertos a convertir su conocimiento en negocios digitales y hoy escala negocios con tecnología e inteligencia artificial." },
   { id:"alex-dey", n:"Alex Dey", rol:"Conferencista y asesor de ventas", c:"México",
     bio:"Conferencista, escritor, asesor de ventas y coach de superación personal." },
   { id:"alberto-navarro", n:"Alberto Navarro", rol:"Director de marketing · marcas de 7 cifras", c:"México",
-    bio:"Ha liderado campañas que suman más de USD 32 millones en ventas junto a creadores como Mauricio Benoist, Andrés Bilbao y Tania Karam." },
+    tema:"Cómo logramos leads 3 veces más baratos con retornos impensables en 2026",
+    bio:"Consultor y director de marketing de varias marcas personales de siete cifras en el mercado hispano. En seis años ha liderado campañas que suman más de USD 32 millones en ventas junto a creadores como Mauricio Benoist, Andrés Bilbao, Tania Karam y Mike Munzvil." },
   { id:"julian-otalora", n:"Julián Otálora", rol:"Cofundador de Neuropúblico y Fluxi", c:"Colombia",
-    bio:"En Fluxi crea herramientas de IA para vender y automatizar. Es creador de Mentes Geniales, un podcast con más de 5 millones de oyentes." },
+    bio:"Cofundador de Neuropúblico y Fluxi. Junto a su hermano Pablo ha construido y escalado negocios digitales que combinan marketing, ventas y tecnología. En Fluxi desarrolla herramientas de IA para vender mejor y automatizar procesos. Es creador de Mentes Geniales, un podcast con más de 5 millones de oyentes." },
   { id:"alejandro-sanchez", n:"Alejandro Sánchez", rol:"CEO y fundador de Funnelchat", c:"Colombia",
     bio:"Llevó la automatización de WhatsApp a más de 10,000 negocios en 53 países y hoy lidera la evolución de Funnelchat hacia el CRM para agentes de IA." },
   { id:"viny-loureiro", n:"Viny Loureiro", rol:"CEO del Grupo B42", c:"Brasil",
@@ -593,18 +594,19 @@ const DAYS = [
   { key:"2026-10-29", n:"Día 1", date:"Jue, 29 de octubre", title:"Contenido",
     where:"Público Reforma · Av. Paseo de la Reforma 333, piso 7",
     slots:[
-      { s:"13:00", e:"13:30", t:"Acreditación y kit", d:"Solo la persona titular. Es obligatoria para entrar a los días de carrera." },
-      { s:"13:30", e:"13:40", t:"Bienvenida", d:"Equipo de Comunidades Hotmart" },
-      { s:"13:40", e:"14:15", sp:"steven-zamora" },
+      { s:"13:00", e:"13:30", t:"Registro y acreditaciones", d:"Solo la persona titular. La transmisión abre a las 13:00 con pantalla de espera." },
+      { s:"13:30", e:"13:40", t:"Bienvenida y agenda del día", d:"Con Edgar Vergara, conducción" },
+      { s:"13:40", e:"14:15", sp:"steven-zamora", t:"Lanzamiento Launchpad", d:"Steven Zamora y Paula Lopes" },
       { s:"14:15", e:"14:50", sp:"santiago-castaneda" },
       { s:"14:50", e:"15:25", sp:"alex-dey" },
-      { s:"15:25", e:"15:40", t:"Pit stop", d:"Café y networking" },
-      { s:"15:40", e:"16:15", sp:"alberto-navarro" },
+      { s:"15:25", e:"16:00", sp:"alberto-navarro" },
+      { s:"16:00", e:"16:15", t:"Break", d:"Café y networking" },
       { s:"16:15", e:"16:50", sp:"julian-otalora" },
       { s:"16:50", e:"17:25", sp:"alejandro-sanchez" },
       { s:"17:25", e:"18:00", sp:"viny-loureiro" },
-      { s:"18:00", e:"19:00", t:"Cierre y networking", d:"Fin de la transmisión digital" },
-      { s:"19:00", e:"21:00", t:"Cena", d:"Solo asistentes presenciales" }
+      { s:"18:00", e:"18:50", t:"Hotseats en mesas", d:"Solo presencial. Termina la transmisión digital." },
+      { s:"18:50", e:"19:00", t:"Foto grupal y evaluación", d:"Responde la evaluación aquí en la app.", link:"#evaluacion" },
+      { s:"19:00", e:"21:00", t:"Cena", d:"En la misma sede · solo presencial" }
     ]},
   { key:"2026-10-30", n:"Día 2", date:"Vie, 30 de octubre", title:"Carrera",
     where:"Autódromo Hermanos Rodríguez · salida desde el Ángel de la Independencia",
@@ -691,7 +693,7 @@ let PEOPLE = [];                        // perfiles de asistentes
 let FILTER = "all";
 
 function speakerAsPerson(s){
-  return { kind:"speaker", id:s.id, name:s.n, project:s.rol, country:s.c, bio:s.bio, photo:`https://digital.hotmartcomunidades.com/img/speakers/${s.id}.jpg`, community:"Speaker" };
+  return { kind:"speaker", id:s.id, name:s.n, project:s.rol, tema:s.tema, country:s.c, bio:s.bio, photo:`https://digital.hotmartcomunidades.com/img/speakers/${s.id}.jpg`, community:"Speaker" };
 }
 
 /* ===================== ROUTER ===================== */
@@ -719,11 +721,11 @@ function renderStrip(){
   } else {
     const cur = d.slots.find(s => min >= toMin(s.s) && min < toMin(s.e));
     const next = d.slots.find(s => toMin(s.s) > min);
-    const name = s => s.sp ? sp(s.sp).n : s.t;
+    const name = s => s.t || sp(s.sp).n;
     if (cur) html = `<span class="pill"><i></i>Ahora</span><span class="t"><b style="color:var(--fg)">${esc(name(cur))}</b> · hasta las ${fmt12(cur.e)} hrs${next ? `<span class="nx"> · después: ${esc(name(next))}</span>` : ""}</span>`;
     else if (next) html = `<span class="pill off"><i></i>Hoy · ${esc(d.title)}</span><span class="t">Arrancamos a las ${fmt12(next.s)} hrs con ${esc(name(next))}.</span>`;
     else html = `<span class="pill off"><i></i>Terminó el ${esc(d.n.toLowerCase())}</span><span class="t">Gracias por estar. Cuéntanos cómo te fue.</span><a href="#evaluacion">Evaluar →</a>`;
-    if (day === DAYS[0].key && min >= toMin("13:30") && min < toMin("18:00")) html += `<a href="${CONFIG.STREAM_URL}" target="_blank" rel="noopener">Transmisión →</a>`;
+    if (day === DAYS[0].key && min >= toMin("13:00") && min < toMin("18:00")) html += `<a href="${CONFIG.STREAM_URL}" target="_blank" rel="noopener">Transmisión →</a>`;
   }
   $("#strip .wrap").innerHTML = html;
 }
@@ -804,6 +806,7 @@ function openPerson(id){
       <div class="tags">${tags}</div>
     </div></div>
     ${p.kind !== "speaker" && p.project ? `<div class="sec"><p class="label">Proyecto</p><p>${esc(p.project)}</p></div>` : ""}
+    ${p.tema ? `<div class="sec"><p class="label">Ponencia</p><p>${esc(p.tema)}</p></div>` : ""}
     ${p.bio ? `<div class="sec"><p class="label">Bio</p><p>${esc(p.bio)}</p></div>` : ""}
     ${p.help ? `<div class="sec"><p class="label">Puede ayudarte con</p><p>${esc(p.help)}</p></div>` : ""}
     <div class="acts">
@@ -825,8 +828,8 @@ function renderDays(){
       const past = isPast || (isToday && min >= toMin(s.e));
       const S = s.sp ? sp(s.sp) : null;
       const what = S
-        ? `<div class="who">${avatar({ name:S.n, photo:`https://digital.hotmartcomunidades.com/img/speakers/${S.id}.jpg` })}<div>${now ? `<span class="live"><i></i>En el escenario</span>` : ""}<b>${esc(S.n)}</b><span>${esc(S.rol)}</span></div></div>`
-        : `<div>${now ? `<span class="live"><i></i>Ahora</span>` : ""}<b>${esc(s.t)}</b>${s.d ? `<span>${esc(s.d)}</span>` : ""}</div>`;
+        ? `<div class="who">${avatar({ name:S.n, photo:`https://digital.hotmartcomunidades.com/img/speakers/${S.id}.jpg` })}<div>${now ? `<span class="live"><i></i>En el escenario</span>` : ""}<b>${esc(s.t || S.n)}</b><span>${esc(s.d || (S.tema || S.rol))}</span></div></div>`
+        : `<div>${now ? `<span class="live"><i></i>Ahora</span>` : ""}<b>${esc(s.t)}</b>${s.d ? `<span>${s.link ? `<a href="${s.link}" style="color:var(--orange);font-weight:700;text-decoration:none">${esc(s.d)}</a>` : esc(s.d)}</span>` : ""}</div>`;
       return `<li class="slot${now ? " now" : ""}${past ? " past" : ""}"><span class="h">${fmt12(s.s)}<small>a ${fmt12(s.e)} hrs</small></span>${what}</li>`;
     }).join("");
     return `<details class="day" ${d.key === openKey ? "open" : ""}>
@@ -841,7 +844,7 @@ let NPS = null; const PICKS = new Set();
 $("#nps").innerHTML = Array.from({ length:11 }, (_, i) => `<button type="button" role="radio" aria-checked="false" aria-pressed="false" data-v="${i}">${i}</button>`).join("");
 $("#nps").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; NPS = +b.dataset.v;
   $$("#nps button").forEach(x => { const on = x === b; x.setAttribute("aria-pressed", on); x.setAttribute("aria-checked", on); }); $("#evalErr").hidden = true; });
-$("#picks").innerHTML = SPEAKERS.map(s => `<button type="button" class="pick" aria-pressed="false" data-id="${s.id}">${avatar({ name:s.n, photo:`https://digital.hotmartcomunidades.com/img/speakers/${s.id}.jpg` })}${esc(s.n)}</button>`).join("");
+$("#picks").innerHTML = SPEAKERS.map(s => `<button type="button" class="pick" aria-pressed="false" data-id="${s.id}">${avatar({ name:s.n, photo:`https://digital.hotmartcomunidades.com/img/speakers/${s.id}.jpg` })}${esc(s.id === "steven-zamora" ? "Launchpad · Steven y Paula" : s.n)}</button>`).join("");
 $("#picks").addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return;
   const on = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", on); on ? PICKS.add(b.dataset.id) : PICKS.delete(b.dataset.id); });
 $("#evalForm").addEventListener("submit", async e => {
@@ -849,7 +852,7 @@ $("#evalForm").addEventListener("submit", async e => {
   if (NPS === null){ $("#evalErr").hidden = false; $("#nps button").focus(); return; }
   const btn = $("#evalBtn"); btn.disabled = true; btn.innerHTML = `<span class="spin"></span>`;
   try{
-    await API.saveEval({ nps:NPS, speakers:[...PICKS].map(id => sp(id).n), take:$("#e-best").value.trim(), improve:$("#e-better").value.trim(), email: ME?.email || "", name: ME?.name || "", ts:new Date().toISOString() });
+    await API.saveEval({ nps:NPS, speakers:[...PICKS].map(id => id === "steven-zamora" ? "Lanzamiento Launchpad (Steven Zamora y Paula Lopes)" : sp(id).n), take:$("#e-best").value.trim(), improve:$("#e-better").value.trim(), email: ME?.email || "", name: ME?.name || "", ts:new Date().toISOString() });
     store.set("pd_eval_done", true); showEvalDone();
   }catch(err){ btn.disabled = false; btn.textContent = "Enviar evaluación"; $("#evalErr").textContent = "No pudimos enviar tu evaluación. Intenta de nuevo."; $("#evalErr").hidden = false; }
 });
