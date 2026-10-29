@@ -503,7 +503,7 @@ footer img{height:18px;width:auto}
     </div>
     <div class="w-step" id="w-q" hidden>
       <div class="w-me" id="w-me"></div>
-      <p class="label">Dos preguntas rápidas</p>
+      <p class="label">Dos preguntas rápidas · opcional</p>
       <h1>Antes de arrancar, <em>cuéntanos.</em></h1>
       <p class="w-sub">Esto aparece en tu tarjeta de la parrilla para que los demás sepan cómo ayudarte y en qué les puedes ayudar tú.</p>
       <form id="w-qform" class="w-form" novalidate>
@@ -1271,11 +1271,10 @@ const W = {
 $("#w-qform").addEventListener("submit", async e => {
   e.preventDefault();
   const chal = $("#w-chal").value.trim(), help = $("#w-help").value.trim(), er = $("#w-err2"), btn = $("#w-go2");
-  if (!chal){ er.textContent = "Cuéntanos tu desafío para entrar."; er.hidden = false; $("#w-chal").focus(); return; }
-  if (!help){ er.textContent = "Cuéntanos en qué puedes ayudar para entrar."; er.hidden = false; $("#w-help").focus(); return; }
+  store.set("pd_q_seen", true);
   er.hidden = true; btn.disabled = true; btn.innerHTML = `<span class="spin"></span>`;
   try{
-    const r = await API.saveProfile({ ...ME, challenge: chal, help });
+    const r = (chal || help) ? await API.saveProfile({ ...ME, challenge: chal, help }) : {};
     ME = { ...ME, ...(r.profile || {}), challenge: chal, help }; DRAFT = { ...ME }; store.set("pd_me", ME);
     try{ PEOPLE = await API.profiles(); }catch(x){}
     renderMe(); fillForm(); renderPeople(); W.close(); location.hash = "#quien";
@@ -1297,7 +1296,7 @@ $("#w-form").addEventListener("submit", async e => {
     if (r.needName){ $("#w-namebox").hidden = false; setTimeout(() => $("#w-name").focus(), 50); }
     else {
       ME = r.profile; DRAFT = { ...ME }; store.set("pd_me", ME); renderMe(); fillForm();
-      if (!ME.challenge || !ME.help) W.questions();
+      if ((!ME.challenge || !ME.help) && !store.get("pd_q_seen", false)) W.questions();
       else { try{ PEOPLE = await API.profiles(); }catch(x){} renderPeople(); W.close(); location.hash = "#quien"; toast(`Hola de nuevo, ${ME.name.split(" ")[0]}.`); }
     }
   }catch(x){ er.textContent = x.message; er.hidden = false; }
@@ -1316,7 +1315,7 @@ $("#join").addEventListener("click", e => { if (e.target.closest("[data-enter]")
   try{ PEOPLE = await API.profiles(); }catch(e){ PEOPLE = []; }
   renderMe(); fillForm(); renderPeople(); renderMaterial(); renderStrip(); route();
   if (!ME && new URLSearchParams(location.search).get("welcome") !== "0") W.open();
-  else if (ME && (!ME.challenge || !ME.help)){ W.open(); W.questions(); }
+  else if (ME && (!ME.challenge || !ME.help) && !store.get("pd_q_seen", false)){ W.open(); W.questions(); }
   $("#wifi2").hidden = nowMX().day > DAYS[0].key;
   if (store.get("pd_eval_done", false)) showEvalDone(); else { loadDraft(); renderStrip(); }
   setInterval(() => { renderStrip(); if (location.hash === "#cronograma") renderDays(); }, 60000);
