@@ -7,6 +7,8 @@ Producción: https://agenda.hotmartcomunidades.com · Vercel: proyecto `agenda` 
 ## Cómo se edita
 - **Agenda, speakers, links de Drive:** en `index.html`, objetos `CONFIG`, `SPEAKERS` y `DAYS`.
 - **Probar otra hora:** agrega `?now=2026-10-29T14:20` a la URL.
+- **Botón de ayuda:** WhatsApp al +52 55 6787 0465 (enlace `wa.me` en `index.html`).
+- **App:** `manifest.webmanifest` + `icons/` para guardarla en la pantalla de inicio.
 
 ## Backend (carpeta `api/`, Vercel Blob)
 - `GET /api/profiles` · perfiles públicos (sin correo).

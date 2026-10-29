@@ -10,13 +10,18 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Paddock · Titanium × NOVA 30">
-<meta property="og:description" content="Quién está aquí, cronograma, slides y fotos del encuentro en la CDMX.">
+<meta property="og:description" content="La parrilla, el cronograma, slides y fotos del encuentro en la CDMX.">
 <meta property="og:image" content="https://evento.hotmartcomunidades.com/og-evento.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="https://assets.hotmartcomunidades.com/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="https://assets.hotmartcomunidades.com/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="https://assets.hotmartcomunidades.com/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Paddock">
 
 <link rel="stylesheet" href="https://assets.hotmartcomunidades.com/brand.css">
 <link rel="stylesheet" href="https://assets.hotmartcomunidades.com/components.css">
@@ -167,6 +172,12 @@ main{min-height:70vh}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
 .person{position:relative;display:grid;justify-items:center;text-align:center;gap:10px;padding:26px 20px 20px;background:var(--card);border:1px solid var(--line);border-radius:16px;cursor:pointer;transition:border-color .25s,transform .25s,background .25s;overflow:hidden}
+.grid.parrilla{grid-template-columns:repeat(4,minmax(0,1fr));column-gap:18px;row-gap:20px;padding-bottom:56px}
+.grid.parrilla .person:nth-child(4n+2),.grid.parrilla .person:nth-child(4n+4){top:56px}
+@media (max-width:1000px){.grid.parrilla{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.parrilla .person:nth-child(4n+2),.grid.parrilla .person:nth-child(4n+4){top:0}.grid.parrilla .person:nth-child(even){top:44px}}
+@media (max-width:520px){.grid.parrilla{column-gap:10px;row-gap:12px}.grid.parrilla .person{padding:22px 12px 16px}.grid.parrilla .person .av{width:72px;height:72px;font-size:24px}.grid.parrilla .person h3{font-size:16px}.grid.parrilla .person p.bio{font-size:12.5px}}
+.grid.parrilla .person::before{content:"";position:absolute;top:10px;left:16px;right:16px;height:12px;border:2px solid rgba(255,255,255,.14);border-bottom:0;pointer-events:none}
+.grid.parrilla .person{top:0}
 .person:hover,.person:focus-visible{border-color:rgba(255,64,0,.45);transform:translateY(-2px);outline:none}
 .person .av{width:96px;height:96px;font-size:30px}
 .person h3{font-family:var(--font-display);font-size:19px;line-height:1.2;margin-top:6px}
@@ -178,6 +189,8 @@ main{min-height:70vh}
 .tag.ti{border-color:rgba(193,122,92,.55);color:#e7b9a4}
 .tag img{width:12px;height:12px}
 .person .corner{position:absolute;top:14px;left:14px}
+#join .join{grid-template-columns:minmax(0,1fr) auto;align-items:center;margin-bottom:22px}
+@media (max-width:620px){#join .join{grid-template-columns:1fr}}
 .join{display:grid;align-content:center;justify-items:start;gap:12px;padding:26px;border-radius:16px;border:1px dashed rgba(255,64,0,.45);background:radial-gradient(120% 120% at 0% 0%,rgba(255,64,0,.12),transparent 60%)}
 .join h3{font-family:var(--font-display);font-size:22px;line-height:1.15}
 .join p{font-size:14px;color:var(--dim)}
@@ -284,6 +297,7 @@ dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
 .rates{display:grid;gap:8px;margin-top:6px}
 .rate{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px;align-items:center;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--field)}
 .rate.miss{border-color:rgba(255,64,0,.6)}
+.rate.flash{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,64,0,.18);transition:box-shadow .3s}
 .rate .who{display:flex;gap:12px;align-items:center;min-width:0}
 .rate .av{width:46px;height:46px;font-size:15px}
 .rate .ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(255,64,0,.1);border:1px solid rgba(255,64,0,.35);color:var(--orange);flex:none}
@@ -326,6 +340,12 @@ dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
 .prof-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}
 .prof-grid aside{position:sticky;top:calc(var(--nav-h) + 70px)}
 @media (max-width:980px){.prof-grid{grid-template-columns:1fr}.prof-grid aside{display:none}}
+.fab{position:fixed;right:20px;bottom:22px;z-index:70;display:inline-flex;align-items:center;gap:10px;padding:12px 16px 12px 13px;border-radius:999px;background:#25D366;color:#06170c;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 14px 34px -10px rgba(0,0,0,.7)}
+.fab svg{width:22px;height:22px}
+.fab:hover{filter:brightness(1.05)}
+@media (max-width:760px){.fab{bottom:calc(var(--tab-h) + env(safe-area-inset-bottom,0px) + 14px);right:14px;padding:12px}.fab span{display:none}}
+body.r-perfil .fab,body.r-evaluacion .fab{display:none}
+.strip .rate-go{display:inline-flex;align-items:center;gap:8px}
 .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;z-index:90;background:#18181a;border:1px solid var(--line2);padding:12px 18px;border-radius:999px;font-size:14px;font-weight:600;transition:.3s;pointer-events:none;display:flex;gap:10px;align-items:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .toast i{width:8px;height:8px;border-radius:50%;background:#40be78}
@@ -355,6 +375,8 @@ footer img{height:18px;width:auto}
   <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></symbol>
   <symbol id="i-slides" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8M7 12l3-3 2.5 2.5L17 7"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v3M14 9h6v3M4 14h6v3M14 19h6v2"/><path d="M4 4v3M10 4v3M14 9v3M20 9v3M4 14v3M10 14v3M14 19v2M20 19v2"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></symbol>
   <symbol id="i-food" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M4.5 3v5a2.5 2.5 0 0 0 5 0V3M7 11v10M17 21V3c-2.2 1.2-3.5 3.6-3.5 7 0 2 1 3 3.5 3"/></symbol>
   <symbol id="i-starf" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
@@ -372,10 +394,10 @@ footer img{height:18px;width:auto}
           <img class="nv" src="https://assets.hotmartcomunidades.com/logos/nova30-white.png" alt="NOVA 30">
         </span>
       </a>
-      <a class="me new" id="meBtn" href="#perfil"><span>Crear mi perfil</span></a>
+      <a class="me new" id="meBtn" href="#perfil"><span>Toma tu lugar</span></a>
     </div>
     <nav class="tabs" aria-label="Secciones">
-      <a class="tab" href="#quien" data-r="quien"><svg><use href="#i-people"/></svg>Quién es quién</a>
+      <a class="tab" href="#quien" data-r="quien"><svg><use href="#i-grid"/></svg>La parrilla</a>
       <a class="tab" href="#cronograma" data-r="cronograma"><svg><use href="#i-cal"/></svg>Cronograma</a>
       <a class="tab" href="#evaluacion" data-r="evaluacion"><svg><use href="#i-star"/></svg>Evaluación</a>
       <a class="tab" href="#material" data-r="material"><svg><use href="#i-folder"/></svg>Slides y fotos</a>
@@ -391,8 +413,8 @@ footer img{height:18px;width:auto}
 <section class="page wrap" id="p-quien" aria-labelledby="h-quien">
   <div class="ph hero">
     <p class="label">Paddock · CDMX</p>
-    <h1 id="h-quien">Quién está <em>aquí.</em></h1>
-    <p>Todos los que están en el encuentro contigo. Crea tu perfil para aparecer y presiona cualquier tarjeta para ver el perfil completo.</p>
+    <h1 id="h-quien">En la parrilla <em>de salida.</em></h1>
+    <p>Todos los que arrancan contigo este fin de semana. Toma tu lugar en la parrilla y presiona cualquier tarjeta para conocer a quien tienes al lado.</p>
   </div>
 
   <label class="search"><span class="sr">Buscar por nombre</span>
@@ -401,7 +423,8 @@ footer img{height:18px;width:auto}
   </label>
 
 
-  <div class="grid" id="people"></div>
+  <div id="join"></div>
+  <div class="grid parrilla" id="people"></div>
 </section>
 
 <!-- ============ CRONOGRAMA ============ -->
@@ -467,7 +490,7 @@ footer img{height:18px;width:auto}
   <div class="ph">
     <p class="label">Evaluación</p>
     <h1 id="h-eval">¿Cómo te fue <em>hoy?</em></h1>
-    <p>Califica el encuentro, cada ponencia y la comida. Toma dos minutos y con tus respuestas diseñamos los próximos encuentros.</p>
+    <p>Califica el encuentro, cada ponencia y la comida. Puedes ir calificando cada ponencia al terminar: tus respuestas se guardan en tu celular hasta que presiones “Enviar evaluación”.</p>
   </div>
 
   <form id="evalForm" class="box" novalidate>
@@ -526,7 +549,7 @@ footer img{height:18px;width:auto}
   <div class="ph">
     <p class="label">Mi perfil</p>
     <h1 id="h-perfil">Así te ven <em>los demás.</em></h1>
-    <p>Tu perfil aparece en Quién es quién. Escribe tu Instagram y presiona “Traer de Instagram” para llenarlo en un segundo.</p>
+    <p>Tu perfil aparece en la parrilla. Escribe tu Instagram y presiona “Traer de Instagram” para llenarlo en un segundo.</p>
   </div>
 
   <div class="prof-grid">
@@ -560,7 +583,7 @@ footer img{height:18px;width:auto}
 
       <div class="box">
         <h2>Tu perfil público</h2>
-        <p class="muted">Esto es lo que ven los demás en Quién es quién.</p>
+        <p class="muted">Esto es lo que ven los demás en la parrilla.</p>
         <div class="field">
           <label for="f-name">Nombre</label>
           <input class="in" id="f-name" type="text" autocomplete="name" maxlength="80" required>
@@ -598,7 +621,7 @@ footer img{height:18px;width:auto}
       </div>
 
       <p class="note warn" id="profErr" hidden></p>
-      <div class="savebar"><button class="btn lg" type="submit" id="saveBtn">Guardar y aparecer en Quién es quién</button></div>
+      <div class="savebar"><button class="btn lg" type="submit" id="saveBtn">Guardar y tomar mi lugar</button></div>
     </form>
 
     <aside>
@@ -617,7 +640,7 @@ footer img{height:18px;width:auto}
 </footer>
 
 <nav class="dock" aria-label="Secciones">
-  <a href="#quien" data-r="quien"><svg><use href="#i-people"/></svg>Quién</a>
+  <a href="#quien" data-r="quien"><svg><use href="#i-grid"/></svg>Parrilla</a>
   <a href="#cronograma" data-r="cronograma"><svg><use href="#i-cal"/></svg>Agenda</a>
   <a href="#evaluacion" data-r="evaluacion"><svg><use href="#i-star"/></svg>Evaluar</a>
   <a href="#material" data-r="material"><svg><use href="#i-folder"/></svg>Material</a>
@@ -626,6 +649,8 @@ footer img{height:18px;width:auto}
 
 <dialog id="dlg" aria-labelledby="dlg-name"><div class="sheet" id="dlgBody"></div></dialog>
 <div class="toast" id="toast" role="status"><i></i><span></span></div>
+<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="¿Necesitas ayuda? Escríbenos por WhatsApp"
+   href="https://wa.me/525567870465?text=Hola%20Edgar%2C%20estoy%20en%20el%20encuentro%20Titanium%20%C3%97%20NOVA%2030%20y%20necesito%20ayuda."><svg><use href="#i-wa"/></svg><span>¿Necesitas ayuda?</span></a>
 
 <script>
 /* =========================================================
@@ -685,34 +710,34 @@ const DAYS = [
       { s:"19:00", e:"21:00", t:"Cena", d:"En la misma sede · solo presencial" }
     ]},
   { key:"2026-10-30", n:"Día 2", date:"Vie, 30 de octubre", title:"Prácticas", race:true,
-    where:"Autódromo Hermanos Rodríguez · Salida 9:00 desde el Ángel de la Independencia · Regreso 18:00",
+    where:"Autódromo Hermanos Rodríguez · Salida 9:00 desde el Hotel Sheraton María Isabel · Regreso 18:00",
     slots:[
       { s:"08:40", e:"09:00", t:"GTM Super Copa", d:"Sesión de práctica", track:true },
-      { s:"09:00", e:"09:40", t:"Salida al autódromo", d:"Ángel de la Independencia. Lleva tu acreditación.", go:true, track:true },
+      { s:"09:00", e:"09:40", t:"Salida al autódromo", d:"Hotel Sheraton María Isabel. Lleva tu acreditación.", go:true, track:true },
       { s:"09:40", e:"10:30", t:"Masters Historic", d:"Sesión de práctica", track:true },
       { s:"10:30", e:"12:30", t:"F4 NACAM Championship", d:"Sesión de práctica", track:true },
       { s:"12:30", e:"14:00", t:"Práctica 1", d:"Fórmula 1", hl:true, track:true },
       { s:"14:00", e:"16:00", t:"GTM Super Copa", d:"Clasificación", track:true },
       { s:"16:00", e:"17:30", t:"Práctica 2", d:"Fórmula 1", hl:true, track:true },
       { s:"17:30", e:"18:00", t:"Masters Historic", d:"Clasificación", track:true },
-      { s:"18:00", e:"19:00", t:"Regreso", d:"Salida del autódromo de vuelta al Ángel.", go:true, track:true }
+      { s:"18:00", e:"19:00", t:"Regreso", d:"Salida del autódromo de vuelta al Sheraton María Isabel.", go:true, track:true }
     ]},
   { key:"2026-10-31", n:"Día 3", date:"Sáb, 31 de octubre", title:"Clasificación", race:true,
-    where:"Autódromo Hermanos Rodríguez · Salida 9:00 desde el Ángel de la Independencia · Regreso 18:00",
+    where:"Autódromo Hermanos Rodríguez · Salida 9:00 desde el Hotel Sheraton María Isabel · Regreso 18:00",
     slots:[
-      { s:"09:00", e:"09:25", t:"Salida al autódromo", d:"Ángel de la Independencia. Lleva tu acreditación.", go:true, track:true },
+      { s:"09:00", e:"09:25", t:"Salida al autódromo", d:"Hotel Sheraton María Isabel. Lleva tu acreditación.", go:true, track:true },
       { s:"09:25", e:"10:15", t:"F4 NACAM Championship", d:"Clasificación", track:true },
       { s:"10:15", e:"11:30", t:"Masters Historic", d:"Primera carrera", track:true },
       { s:"11:30", e:"12:55", t:"Práctica 3", d:"Fórmula 1", hl:true, track:true },
       { s:"12:55", e:"15:00", t:"GTM Super Copa", d:"Primera carrera", track:true },
       { s:"15:00", e:"16:45", t:"Clasificación", d:"Fórmula 1", hl:true, track:true },
       { s:"16:45", e:"18:00", t:"F4 NACAM Championship", d:"Primera carrera", track:true },
-      { s:"18:00", e:"19:00", t:"Regreso", d:"Salida del autódromo de vuelta al Ángel.", go:true, track:true }
+      { s:"18:00", e:"19:00", t:"Regreso", d:"Salida del autódromo de vuelta al Sheraton María Isabel.", go:true, track:true }
     ]},
   { key:"2026-11-01", n:"Día 4", date:"Dom, 1 de noviembre", title:"Día de la carrera", race:true,
-    where:"Autódromo Hermanos Rodríguez · Salida 9:00 desde el Ángel de la Independencia · Regreso 18:00",
+    where:"Autódromo Hermanos Rodríguez · Salida 9:00 desde el Hotel Sheraton María Isabel · Regreso 18:00",
     slots:[
-      { s:"09:00", e:"09:05", t:"Salida al autódromo", d:"Ángel de la Independencia. Lleva tu acreditación.", go:true, track:true },
+      { s:"09:00", e:"09:05", t:"Salida al autódromo", d:"Hotel Sheraton María Isabel. Lleva tu acreditación.", go:true, track:true },
       { s:"09:05", e:"10:05", t:"GTM Super Copa", d:"Segunda carrera", track:true },
       { s:"10:05", e:"11:05", t:"Masters Historic", d:"Segunda carrera", track:true },
       { s:"11:05", e:"12:00", t:"F4 NACAM Championship", d:"Segunda carrera", track:true },
@@ -720,7 +745,7 @@ const DAYS = [
       { s:"12:30", e:"13:44", t:"Ceremonia de apertura", d:"Fórmula 1", hl:true, track:true },
       { s:"13:44", e:"14:00", t:"Himno Nacional", d:"Fórmula 1", hl:true, track:true },
       { s:"14:00", e:"18:00", t:"Gran Premio de la Ciudad de México", d:"Fórmula 1 · La carrera", hl:true, track:true },
-      { s:"18:00", e:"19:00", t:"Regreso", d:"Salida del autódromo de vuelta al Ángel.", go:true, track:true }
+      { s:"18:00", e:"19:00", t:"Regreso", d:"Salida del autódromo de vuelta al Sheraton María Isabel.", go:true, track:true }
     ]}
 ];
 
@@ -793,8 +818,10 @@ function route(){
   let r = location.hash.replace("#","");
   if (!ROUTES.includes(r)) r = "quien";
   $$(".page").forEach(p => p.classList.toggle("on", p.id === "p-" + r));
+  document.body.className = "r-" + r;
   $$("[data-r]").forEach(a => a.setAttribute("aria-current", a.dataset.r === r ? "page" : "false"));
   if (r === "cronograma") renderDays();
+  if (r === "evaluacion") focusRate();
   window.scrollTo({ top:0, behavior:"instant" in window ? "instant" : "auto" });
 }
 addEventListener("hashchange", route);
@@ -815,10 +842,21 @@ function renderStrip(){
     const name = s => s.t || sp(s.sp).n;
     if (cur) html = `<span class="pill"><i></i>Ahora</span><span class="t"><b style="color:var(--fg)">${esc(name(cur))}</b> · hasta las ${fmt12(cur.e)} hrs${next ? `<span class="nx"> · después: ${esc(name(next))}</span>` : ""}</span>`;
     else if (next) html = `<span class="pill off"><i></i>Hoy · ${esc(d.title)}</span><span class="t">Arrancamos a las ${fmt12(next.s)} hrs con ${esc(name(next))}.</span>`;
-    else html = `<span class="pill off"><i></i>Terminó el ${esc(d.n.toLowerCase())}</span><span class="t">Gracias por estar. Cuéntanos cómo te fue.</span><a href="#evaluacion">Evaluar →</a>`;
-    if (day === DAYS[0].key && min >= toMin("13:00") && min < toMin("18:00")) html += `<a href="${CONFIG.STREAM_URL}" target="_blank" rel="noopener">Transmisión →</a>`;
+    else html = d.race
+      ? `<span class="pill off"><i></i>Terminó el ${esc(d.n.toLowerCase())}</span><span class="t">Gracias por vivirlo con nosotros.</span>`
+      : `<span class="pill off"><i></i>Terminó el ${esc(d.n.toLowerCase())}</span><span class="t">Gracias por estar. Cuéntanos cómo te fue.</span><a href="#evaluacion">Evaluar →</a>`;
+    const justDone = !store.get("pd_eval_done", false) && d.slots.find(s => s.sp && min >= toMin(s.e) && min < toMin(s.e) + 12 && !(s.sp in RATES));
+    if (justDone){
+      html = `<span class="pill"><i></i>Acaba de terminar</span><span class="t">¿Qué te pareció <b style="color:var(--fg)">${esc(justDone.t || sp(justDone.sp).n)}</b>?${cur ? `<span class="nx"> · Ahora: ${esc(name(cur))}</span>` : ""}</span><a href="#evaluacion" data-rate="${justDone.sp}">Califícala →</a>`;
+    } else if (day === DAYS[0].key && min >= toMin("13:00") && min < toMin("18:00")) html += `<a href="${CONFIG.STREAM_URL}" target="_blank" rel="noopener">Transmisión →</a>`;
   }
   $("#strip .wrap").innerHTML = html;
+}
+let RATE_TARGET = null;
+$("#strip").addEventListener("click", e => { const a = e.target.closest("[data-rate]"); if (a) RATE_TARGET = a.dataset.rate; });
+function focusRate(){
+  if (!RATE_TARGET) return; const row = $(`.rate[data-id="${RATE_TARGET}"]`); RATE_TARGET = null; if (!row) return;
+  setTimeout(() => { row.scrollIntoView({ behavior:"smooth", block:"center" }); row.classList.add("flash"); setTimeout(() => row.classList.remove("flash"), 1600); }, 120);
 }
 
 /* ===================== QUIÉN ES QUIÉN ===================== */
@@ -847,7 +885,7 @@ function renderPeople(){
   const list = all.filter(p => match(p,q));
   const hasMe = ME && PEOPLE.some(p => p.id === ME.id);
   let html = "";
-  if (!hasMe && !q) html += `<div class="join"><p class="label">${all.length ? "Aún no apareces" : "Sé el primero"}</p><h3>Crea tu perfil y que te encuentren.</h3><p>Toma un minuto: escribe tu Instagram y nosotros traemos tu foto y tu bio.</p><a class="btn" href="#perfil">Crear mi perfil</a></div>`;
+  $("#join").innerHTML = (!hasMe && !q) ? `<div class="join"><div><p class="label">${all.length ? "Aún no estás en la parrilla" : "La parrilla está vacía"}</p><h3>${all.length ? "Toma tu lugar en la parrilla." : "Sé el primero en tomar su lugar."}</h3><p>Toma un minuto: escribe tu Instagram y nosotros traemos tu foto y tu bio.</p></div><a class="btn" href="#perfil">Toma tu lugar</a></div>` : "";
   html += list.map(card).join("");
   if (!list.length && q) html += `<div class="empty" style="grid-column:1/-1">No encontramos a nadie con “${esc($("#q").value)}”.</div>`;
   $("#people").innerHTML = html;
@@ -885,8 +923,8 @@ let SELDAY = null;
 const VENUES = {
   content: { lbl:"Dónde es", name:"Público Reforma", addr:"Av. Paseo de la Reforma 333, piso 7 · CDMX",
     map:"https://www.google.com/maps/search/?api=1&query=P%C3%BAblico+Reforma%2C+Av.+Paseo+de+la+Reforma+333%2C+Ciudad+de+M%C3%A9xico" },
-  race: { lbl:"Punto de salida · 9:00 hrs", name:"Ángel de la Independencia", addr:"Paseo de la Reforma · Regreso a las 18:00 hrs",
-    map:"https://www.google.com/maps/search/?api=1&query=%C3%81ngel+de+la+Independencia%2C+Ciudad+de+M%C3%A9xico" }
+  race: { lbl:"Punto de salida · 9:00 hrs", name:"Hotel Sheraton María Isabel", addr:"Paseo de la Reforma 325 · Regreso a las 18:00 hrs",
+    map:"https://www.google.com/maps/search/?api=1&query=Sheraton+Mar%C3%ADa+Isabel%2C+Paseo+de+la+Reforma+325%2C+Ciudad+de+M%C3%A9xico" }
 };
 function renderDays(){
   const { day, min } = nowMX();
@@ -931,7 +969,19 @@ const RATE_ITEMS = [
 ];
 $("#nps").innerHTML = Array.from({ length:11 }, (_, i) => `<button type="button" role="radio" aria-checked="false" aria-pressed="false" data-v="${i}">${i}</button>`).join("");
 $("#nps").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; NPS = +b.dataset.v;
-  $$("#nps button").forEach(x => { const on = x === b; x.setAttribute("aria-pressed", on); x.setAttribute("aria-checked", on); }); });
+  $$("#nps button").forEach(x => { const on = x === b; x.setAttribute("aria-pressed", on); x.setAttribute("aria-checked", on); }); saveDraft(); });
+function saveDraft(){ store.set("pd_eval_draft", { nps:NPS, rates:RATES, take:$("#e-best").value, improve:$("#e-better").value }); }
+function loadDraft(){
+  const d = store.get("pd_eval_draft", null); if (!d) return;
+  if (d.nps != null){ NPS = d.nps; $$("#nps button").forEach(x => { const on = +x.dataset.v === NPS; x.setAttribute("aria-pressed", on); x.setAttribute("aria-checked", on); }); }
+  Object.entries(d.rates || {}).forEach(([id, v]) => {
+    const row = $(`.rate[data-id="${id}"]`); if (!row) return; RATES[id] = v;
+    row.querySelectorAll(".stars button").forEach(b => b.classList.toggle("on", v != null && +b.dataset.v <= v));
+    row.querySelector(".na").setAttribute("aria-pressed", v == null ? "true" : "false");
+  });
+  $("#e-best").value = d.take || ""; $("#e-better").value = d.improve || "";
+}
+$("#e-best").addEventListener("input", saveDraft); $("#e-better").addEventListener("input", saveDraft);
 $("#rates").innerHTML = RATE_ITEMS.map(it => `<div class="rate" data-id="${it.id}">
   <div class="who">${it.icon ? `<span class="ic"><svg><use href="#${it.icon}"/></svg></span>` : avatar({ name:it.name, photo:it.photo })}<div><b>${esc(it.title)}</b><span class="s">${esc(it.sub || "")}</span></div></div>
   <div class="ctl"><div class="stars" role="radiogroup" aria-label="Calificación de ${esc(it.title)}">${[1,2,3,4,5].map(n => `<button type="button" data-v="${n}" aria-label="${n} de 5"><svg><use href="#i-starf"/></svg></button>`).join("")}</div>
@@ -945,6 +995,7 @@ $("#rates").addEventListener("click", e => {
   else return;
   row.querySelectorAll(".stars button").forEach(b => b.classList.toggle("on", RATES[id] != null && +b.dataset.v <= RATES[id]));
   row.classList.remove("miss");
+  saveDraft(); renderStrip();
 });
 $("#evalForm").addEventListener("submit", async e => {
   e.preventDefault();
@@ -1054,7 +1105,7 @@ $("#profForm").addEventListener("submit", async e => {
     const r = await API.saveProfile(p);
     ME = { ...p, ...(r.profile || {}), email: p.email }; DRAFT = { ...ME }; store.set("pd_me", ME);
     PEOPLE = await API.profiles(); renderMe(); renderPeople();
-    toast("Perfil guardado. Ya apareces en Quién es quién.");
+    toast("Listo. Ya estás en la parrilla.");
     setTimeout(() => location.hash = "#quien", 700);
   }catch(x){ err.textContent = (x && x.message && x.message !== "save") ? x.message : "No pudimos guardar tu perfil. Intenta de nuevo."; err.hidden = false; }
   btn.disabled = false; btn.textContent = "Guardar cambios";
@@ -1063,14 +1114,14 @@ $("#profForm").addEventListener("submit", async e => {
 function renderMe(){
   const b = $("#meBtn");
   if (ME){ b.classList.remove("new"); b.innerHTML = `${avatar(ME)}<span>${esc(ME.name.split(" ")[0])}</span>`; $("#saveBtn").textContent = "Guardar cambios"; }
-  else { b.classList.add("new"); b.innerHTML = `<span>Crear mi perfil</span>`; }
+  else { b.classList.add("new"); b.innerHTML = `<span>Toma tu lugar</span>`; }
 }
 
 /* ===================== INICIO ===================== */
 (async function init(){
   try{ PEOPLE = await API.profiles(); }catch(e){ PEOPLE = []; }
   renderMe(); fillForm(); renderPeople(); renderMaterial(); renderStrip(); route();
-  if (store.get("pd_eval_done", false)) showEvalDone();
+  if (store.get("pd_eval_done", false)) showEvalDone(); else { loadDraft(); renderStrip(); }
   setInterval(() => { renderStrip(); if (location.hash === "#cronograma") renderDays(); }, 60000);
 })();
 </script>
