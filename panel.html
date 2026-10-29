@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel · Paddock Titanium × NOVA 30</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="https://assets.hotmartcomunidades.com/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://assets.hotmartcomunidades.com/brand.css">
+<link rel="stylesheet" href="https://assets.hotmartcomunidades.com/components.css">
+<style>
+:root{color-scheme:dark;--bg:#060606;--card:#101011;--field:#161618;--fg:#F4F1EC;--dim:rgba(244,241,236,.66);--faint:rgba(244,241,236,.42);--line:rgba(255,255,255,.1);--line2:rgba(255,255,255,.16);--orange:var(--hot-orange,#FF4000);--track:rgba(255,255,255,.07)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;font-weight:400}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--orange)}
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(6,6,6,.9);backdrop-filter:blur(12px);z-index:10}
+header .wrap{display:flex;align-items:center;gap:16px;height:64px}
+header img{height:19px}
+header .t{font-family:var(--font-display);font-size:17px}
+header .sp{flex:1}
+header .upd{font-size:12.5px;color:var(--faint)}
+.btn-line{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:2px;border:1px solid var(--line2);background:transparent;color:var(--fg);font:inherit;font-weight:700;font-size:13px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-line:hover{border-color:rgba(255,255,255,.35)}
+main{padding:36px 0 64px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.head h1{font-family:var(--font-display);font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.05;letter-spacing:-.02em;margin-top:8px}
+.head h1 em{font-style:normal;color:var(--orange)}
+.dl{display:flex;gap:8px;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.kpi .k{font-size:12px;color:var(--faint);font-weight:600}
+.kpi .v{font-family:var(--font-display);font-size:clamp(34px,4vw,48px);line-height:1.05;letter-spacing:-.03em;margin-top:6px}
+.kpi .s{font-size:12.5px;color:var(--dim);margin-top:4px}
+.kpi.hero{border-color:rgba(255,64,0,.45);background:radial-gradient(140% 140% at 0% 0%,rgba(255,64,0,.16),var(--card) 60%)}
+.grid2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:12px;margin-top:12px}
+@media (max-width:960px){.grid2{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.box h2{font-family:var(--font-display);font-size:20px}
+.box .sub{font-size:13px;color:var(--faint);margin-top:2px}
+.bars{display:grid;gap:12px;margin-top:18px}
+.bar{display:grid;grid-template-columns:minmax(120px,210px) minmax(0,1fr) 76px;gap:14px;align-items:center}
+.bar .n{font-size:14px;font-weight:600;line-height:1.25}
+.bar .n small{display:block;font-weight:400;font-size:12px;color:var(--faint)}
+.bar .tr{position:relative;height:12px;border-radius:4px;background:var(--track)}
+.bar .fl{position:absolute;inset:0 auto 0 0;border-radius:0 4px 4px 0;background:var(--orange)}
+.bar .val{text-align:right;font-family:var(--font-display);font-size:18px}
+.bar .val small{display:block;font-family:var(--font-body);font-size:11.5px;color:var(--faint)}
+.bar.na .val{color:var(--faint)}
+.words .bar{grid-template-columns:120px minmax(0,1fr) 40px}
+@media (max-width:560px){.bar{grid-template-columns:1fr 64px}.bar .tr{grid-column:1/-1;grid-row:2}}
+.hist{display:grid;grid-template-columns:repeat(11,1fr);gap:4px;align-items:end;height:150px;margin-top:22px}
+.hist .c{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:6px}
+.hist .col{width:100%;border-radius:4px 4px 0 0;background:var(--orange);min-height:2px}
+.hist .col.z{background:var(--track)}
+.hist .cnt{font-size:11.5px;color:var(--dim)}
+.hist .x{font-size:12px;color:var(--faint)}
+.npsparts{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--dim)}
+.npsparts b{color:var(--fg);font-weight:700}
+.comments{display:grid;gap:10px;margin-top:16px;max-height:520px;overflow:auto;padding-right:4px}
+.cm{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--field)}
+.cm .who{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--faint)}
+.cm .who b{color:var(--orange);font-weight:700}
+.cm p{margin-top:6px;font-size:14px}
+.cm p span{display:block;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.empty{color:var(--faint);font-size:14px;padding:18px 0}
+.tabs{display:flex;gap:6px;margin-top:14px}
+.tabs button{border:1px solid var(--line2);background:transparent;color:var(--dim);border-radius:999px;padding:6px 12px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer}
+.tabs button[aria-pressed="true"]{border-color:var(--orange);color:var(--fg);background:rgba(255,64,0,.12)}
+.tbl-wrap{overflow:auto;margin-top:16px;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:700;background:#0c0c0d;position:sticky;top:0}
+td .p{display:flex;gap:10px;align-items:center;min-width:180px}
+td .av{width:32px;height:32px;border-radius:50%;overflow:hidden;background:#1c1c1f;display:grid;place-items:center;font-size:12px;flex:none}
+td .av img{width:100%;height:100%;object-fit:cover}
+td a{color:var(--orange);text-decoration:none;font-weight:600}
+td.m{color:var(--dim);max-width:280px}
+.search{width:100%;max-width:340px;background:var(--field);border:1px solid var(--line);border-radius:2px;padding:10px 12px;color:var(--fg);font:inherit}
+.gate{min-height:100vh;display:grid;place-items:center;padding:24px}
+.gate form{width:100%;max-width:380px;display:grid;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px}
+.gate h1{font-family:var(--font-display);font-size:26px}
+.gate input{background:var(--field);border:1px solid var(--line);border-radius:10px;padding:13px 14px;color:var(--fg);font:inherit;font-size:16px}
+.gate .btn{width:100%;justify-content:center;border:0}
+.err{color:#ffb59a;font-size:13px}
+[hidden]{display:none!important}
+.tip{position:fixed;pointer-events:none;z-index:50;background:#1a1a1c;border:1px solid var(--line2);border-radius:8px;padding:6px 10px;font-size:12.5px;opacity:0;transition:opacity .12s}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate" hidden>
+  <form id="gform">
+    <p class="label">Panel privado</p>
+    <h1>Paddock · Titanium × NOVA 30</h1>
+    <label for="gkey" style="font-size:13px;font-weight:700">Llave de acceso</label>
+    <input id="gkey" type="password" autocomplete="current-password">
+    <button class="btn" type="submit">Entrar al panel</button>
+    <p class="err" id="gerr" hidden>Llave incorrecta.</p>
+  </form>
+</div>
+
+<div id="app" hidden>
+<header><div class="wrap">
+  <img src="https://assets.hotmartcomunidades.com/logos/ES_Hotmart_Logo_02_Color_Negative.svg" alt="Hotmart">
+  <span class="t">Panel del encuentro</span>
+  <span class="sp"></span>
+  <span class="upd" id="upd">Cargando…</span>
+  <button class="btn-line" id="refresh" type="button">Actualizar</button>
+</div></header>
+
+<main class="wrap">
+  <div class="head">
+    <div><p class="label">Titanium × NOVA 30 · CDMX</p><h1>Cómo va <em>el encuentro.</em></h1></div>
+    <div class="dl">
+      <a class="btn-line" id="dlP" href="#">Descargar registrados (CSV)</a>
+      <a class="btn-line" id="dlE" href="#">Descargar evaluaciones (CSV)</a>
+    </div>
+  </div>
+
+  <section class="kpis" aria-label="Indicadores">
+    <div class="kpi hero"><p class="k">NPS del encuentro</p><p class="v" id="kNps">—</p><p class="s" id="kNpsS">Meta: 75</p></div>
+    <div class="kpi"><p class="k">Registrados en la parrilla</p><p class="v" id="kReg">—</p><p class="s" id="kRegS"></p></div>
+    <div class="kpi"><p class="k">Evaluaciones recibidas</p><p class="v" id="kEv">—</p><p class="s" id="kEvS"></p></div>
+    <div class="kpi"><p class="k">Calificación de la comida</p><p class="v" id="kFood">—</p><p class="s" id="kFoodS">de 5</p></div>
+  </section>
+
+  <div class="grid2">
+    <section class="box">
+      <h2>Calificación por ponencia</h2>
+      <p class="sub">Promedio de 1 a 5 · entre paréntesis, cuántos la calificaron</p>
+      <div class="bars" id="talks"></div>
+    </section>
+    <section class="box">
+      <h2>Distribución del NPS</h2>
+      <p class="sub">Cuántas personas eligieron cada número</p>
+      <div class="hist" id="hist" role="img" aria-label="Distribución de calificaciones de 0 a 10"></div>
+      <div class="npsparts" id="npsparts"></div>
+    </section>
+  </div>
+
+  <div class="grid2">
+    <section class="box">
+      <h2>Comentarios</h2>
+      <div class="tabs" role="group" aria-label="Tipo de comentario">
+        <button type="button" data-c="take" aria-pressed="true">Qué se llevan</button>
+        <button type="button" data-c="improve" aria-pressed="false">Qué mejorarían</button>
+      </div>
+      <div class="comments" id="comments"></div>
+    </section>
+    <section class="box">
+      <h2>Desafíos más comunes</h2>
+      <p class="sub">Palabras que más se repiten en los desafíos de la parrilla</p>
+      <div class="bars words" id="words"></div>
+    </section>
+  </div>
+
+  <section class="box" style="margin-top:12px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap">
+      <div><h2>Registrados</h2><p class="sub" id="regSub"></p></div>
+      <input class="search" id="q" type="search" placeholder="Buscar por nombre, @, desafío…">
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Persona</th><th>País</th><th>Desafío</th><th>Puede ayudar con</th><th>Registro</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+  </section>
+</main>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const TALKS = [
+  ["steven_zamora","Lanzamiento Launchpad","Steven Zamora y Paula Lopes"],
+  ["santiago_castaneda","Santiago Castañeda","Fundador de Upccelerator"],
+  ["alex_dey","Alex Dey","Conferencista y asesor de ventas"],
+  ["alberto_navarro","Alberto Navarro","Leads 3 veces más baratos"],
+  ["julian_otalora","Julián Otálora","Neuropúblico y Fluxi"],
+  ["alejandro_sanchez","Alejandro Sánchez","Funnelchat"],
+  ["viny_loureiro","Viny Loureiro","Grupo B42"]
+];
+const STOP = new Set("de la el los las un una unos unas y o a en con para por mi mis tu su sus que como del al lo es mas más sin se me muy mejor tener hacer hoy cada ya más pero entre sobre todo bien".split(" "));
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const fmt1 = n => (Math.round(n * 10) / 10).toFixed(1);
+let KEY = "", P = [], E = [], CTAB = "take";
+
+function getKey(){ try{ return new URLSearchParams(location.search).get("key") || sessionStorage.getItem("pd_admin") || ""; }catch(e){ return ""; } }
+async function api(t){
+  const r = await fetch(`/api/export?key=${encodeURIComponent(KEY)}&t=${t}&f=json`, { cache:"no-store" });
+  if (r.status === 401) throw new Error("401");
+  return (await r.json()).rows || [];
+}
+async function load(){
+  $("#upd").textContent = "Actualizando…";
+  try{
+    [P, E] = await Promise.all([api("profiles"), api("evals")]);
+    try{ sessionStorage.setItem("pd_admin", KEY); }catch(e){}
+    $("#gate").hidden = true; $("#app").hidden = false;
+    render();
+    $("#upd").textContent = "Actualizado " + new Date().toLocaleTimeString("es-MX", { hour:"2-digit", minute:"2-digit" });
+  }catch(e){
+    if (e.message === "401"){ $("#app").hidden = true; $("#gate").hidden = false; if (KEY) $("#gerr").hidden = false; }
+    else $("#upd").textContent = "Sin conexión, reintentando…";
+  }
+}
+
+function render(){
+  // KPIs
+  const n = E.length, prom = E.filter(e => e.nps >= 9).length, det = E.filter(e => e.nps <= 6).length, pas = n - prom - det;
+  const nps = n ? Math.round((prom - det) / n * 100) : null;
+  $("#kNps").textContent = nps == null ? "—" : nps;
+  $("#kNpsS").textContent = n ? `Meta: 75 · ${nps >= 75 ? "por encima de la meta" : "por debajo de la meta"}` : "Meta: 75 · aún sin respuestas";
+  $("#kReg").textContent = P.length;
+  const withChal = P.filter(p => p.challenge).length;
+  $("#kRegS").textContent = P.length ? `${withChal} con desafío · ${P.filter(p => p.fromIg).length} entraron con Instagram` : "Nadie se ha registrado aún";
+  $("#kEv").textContent = n;
+  $("#kEvS").textContent = P.length ? (n <= P.length ? `${Math.round(n / P.length * 100)}% de los registrados` : `${P.length} registrados en la parrilla`) : "";
+  const food = E.map(e => e.cal_comida).filter(v => typeof v === "number");
+  $("#kFood").textContent = food.length ? fmt1(food.reduce((a,b) => a+b, 0) / food.length) : "—";
+  $("#kFoodS").textContent = food.length ? `de 5 · ${food.length} respuestas` : "de 5";
+
+  // talks
+  $("#talks").innerHTML = TALKS.map(([k, t, s]) => {
+    const v = E.map(e => e["cal_" + k]).filter(x => typeof x === "number");
+    const avg = v.length ? v.reduce((a,b) => a+b, 0) / v.length : null;
+    const tip = avg == null ? `${t}: sin calificaciones` : `${t}: ${fmt1(avg)} de 5 · ${v.length} calificaciones · ${E.filter(e => e["cal_" + k] === "N/A").length} no la vieron`;
+    return `<div class="bar${avg == null ? " na" : ""}" data-tip="${esc(tip)}"><p class="n">${esc(t)}<small>${esc(s)}</small></p>
+      <div class="tr"><div class="fl" style="width:${avg == null ? 0 : (avg / 5 * 100).toFixed(1)}%"></div></div>
+      <p class="val">${avg == null ? "—" : fmt1(avg)}<small>(${v.length})</small></p></div>`;
+  }).join("");
+
+  // histogram
+  const counts = Array.from({ length:11 }, (_, i) => E.filter(e => e.nps === i).length), max = Math.max(1, ...counts);
+  $("#hist").innerHTML = counts.map((c, i) => `<div class="c" data-tip="${i}: ${c} ${c === 1 ? "persona" : "personas"}"><span class="cnt">${c || ""}</span><div class="col${c ? "" : " z"}" style="height:${c ? Math.max(4, c / max * 100) : 2}%"></div><span class="x">${i}</span></div>`).join("");
+  $("#npsparts").innerHTML = n ? `<span>Promotores (9–10): <b>${prom}</b></span><span>Neutros (7–8): <b>${pas}</b></span><span>Detractores (0–6): <b>${det}</b></span>` : `<span>Aún no hay evaluaciones.</span>`;
+
+  renderComments(); renderWords(); renderRows();
+}
+
+function renderComments(){
+  const list = E.filter(e => (e[CTAB] || "").trim()).slice().reverse();
+  $("#comments").innerHTML = list.length ? list.map(e => `<div class="cm"><div class="who"><span>${esc(e.name || "Anónimo")}${e.ig ? ` · @${esc(e.ig)}` : ""}</span><span><b>NPS ${e.nps}</b> · ${new Date(e.ts).toLocaleTimeString("es-MX", { hour:"2-digit", minute:"2-digit" })}</span></div><p>${esc(e[CTAB])}</p></div>`).join("")
+    : `<p class="empty">Todavía no hay comentarios.</p>`;
+}
+document.querySelector(".tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; CTAB = b.dataset.c;
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-pressed", x === b)); renderComments(); });
+
+function renderWords(){
+  const freq = {};
+  P.forEach(p => {
+    const seen = new Set();
+    String(p.challenge || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9ñ ]/g, " ").split(/\s+/)
+      .filter(w => w.length > 3 && !STOP.has(w)).forEach(w => { if (!seen.has(w)){ seen.add(w); freq[w] = (freq[w] || 0) + 1; } });
+  });
+  const top = Object.entries(freq).sort((a,b) => b[1] - a[1]).slice(0, 8), max = top.length ? top[0][1] : 1;
+  $("#words").innerHTML = top.length ? top.map(([w, c]) => `<div class="bar" data-tip="“${esc(w)}” aparece en ${c} ${c === 1 ? "desafío" : "desafíos"}"><p class="n">${esc(w)}</p><div class="tr"><div class="fl" style="width:${(c / max * 100).toFixed(1)}%"></div></div><p class="val">${c}</p></div>`).join("")
+    : `<p class="empty">Cuando la gente agregue su desafío, aquí verás los temas que más se repiten.</p>`;
+}
+
+function renderRows(){
+  const q = $("#q").value.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+  const list = P.slice().sort((a,b) => String(b.created || b.updated).localeCompare(String(a.created || a.updated)))
+    .filter(p => !q || [p.name, p.ig, p.challenge, p.help, p.country, p.bio].join(" ").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").includes(q));
+  $("#regSub").textContent = `${P.length} en total${q ? ` · ${list.length} con “${$("#q").value}”` : ""}`;
+  const ini = n => (n || "?").trim().split(/\s+/).slice(0,2).map(w => w[0]).join("").toUpperCase();
+  $("#rows").innerHTML = list.length ? list.map(p => `<tr>
+    <td><div class="p"><span class="av">${p.photo ? `<img src="${esc(p.photo)}" alt="" loading="lazy">` : esc(ini(p.name))}</span><div><b>${esc(p.name)}</b><br>${p.ig ? `<a href="https://instagram.com/${encodeURIComponent(p.ig)}" target="_blank" rel="noopener">@${esc(p.ig)}</a>` : ""}</div></div></td>
+    <td class="m">${esc(p.country || "—")}</td><td class="m">${esc(p.challenge || "—")}</td><td class="m">${esc(p.help || "—")}</td>
+    <td class="m">${p.created || p.updated ? new Date(p.created || p.updated).toLocaleString("es-MX", { day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit" }) : "—"}</td></tr>`).join("")
+    : `<tr><td colspan="5" class="empty">${q ? "Sin resultados." : "Nadie se ha registrado aún."}</td></tr>`;
+}
+$("#q").addEventListener("input", renderRows);
+
+// tooltip
+const tip = $("#tip");
+document.addEventListener("mousemove", e => {
+  const t = e.target.closest("[data-tip]");
+  if (!t){ tip.style.opacity = 0; return; }
+  tip.textContent = t.dataset.tip; tip.style.opacity = 1;
+  tip.style.left = Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8) + "px"; tip.style.top = (e.clientY + 14) + "px";
+});
+
+$("#refresh").addEventListener("click", load);
+$("#gform").addEventListener("submit", e => { e.preventDefault(); KEY = $("#gkey").value.trim(); load(); });
+KEY = getKey();
+$("#dlP").addEventListener("click", e => { e.preventDefault(); location.href = `/api/export?key=${encodeURIComponent(KEY)}`; });
+$("#dlE").addEventListener("click", e => { e.preventDefault(); location.href = `/api/export?key=${encodeURIComponent(KEY)}&t=evals`; });
+if (KEY) load(); else $("#gate").hidden = false;
+if (new URLSearchParams(location.search).get("key")) history.replaceState(null, "", location.pathname);
+setInterval(() => { if (!$("#app").hidden) load(); }, 60000);
+</script>
+</body>
+</html>
