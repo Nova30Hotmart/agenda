@@ -42,6 +42,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .wrap{max-width:1160px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
 .label{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--orange)}
 .muted{color:var(--dim)}
+[hidden]{display:none!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* ---------- Top bar ---------- */
@@ -235,6 +236,21 @@ dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
 .slot.now{border-color:rgba(255,64,0,.6);background:radial-gradient(120% 160% at 0% 0%,rgba(255,64,0,.16),var(--card) 60%)}
 .slot.now .h{color:var(--orange)}
 .slot.past{opacity:.5}
+.slot.hl{border-color:rgba(255,64,0,.35)}
+.slot.hl b{color:#ffb59a}
+.slot.go{background:rgba(255,255,255,.035);border-style:dashed}
+.slot.go b{color:var(--fg)}
+.bring{margin-top:28px}
+.bring .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media (max-width:760px){.bring .cols{grid-template-columns:1fr}}
+.bring h3{font-family:var(--font-display);font-size:20px;display:flex;align-items:center;gap:10px}
+.bring h3 i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:14px;font-weight:700}
+.bring .yes h3 i{background:rgba(64,190,120,.15);color:#7fd8a5}
+.bring .no h3 i{background:rgba(255,64,0,.14);color:var(--orange)}
+.bring ul{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.bring li{font-size:13.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--line2);color:var(--dim)}
+.bring li b{color:var(--fg);font-weight:600}
+.bring .fine{margin-top:14px;font-size:12.5px;color:var(--faint)}
 .slot .live{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:3px}
 .slot .live i{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite}
 @media (max-width:520px){.slot{grid-template-columns:1fr;gap:6px}.slot .h small{display:inline;margin-left:6px}}
@@ -246,10 +262,26 @@ dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
 .nps button[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:#fff}
 .nps-l{display:flex;justify-content:space-between;font-size:12px;color:var(--faint);margin-top:6px}
 @media (max-width:520px){.nps{grid-template-columns:repeat(6,1fr)}.nps button{aspect-ratio:auto;height:44px}}
-.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .pick{display:flex;align-items:center;gap:10px;padding:8px 12px 8px 8px;border-radius:999px;border:1px solid var(--line2);background:transparent;text-align:left;font-size:13.5px;font-weight:600}
 .pick .av{width:30px;height:30px}
 .pick[aria-pressed="true"]{border-color:var(--orange);background:rgba(255,64,0,.12)}
+.rates{display:grid;gap:8px;margin-top:6px}
+.rate{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px;align-items:center;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--field)}
+.rate.miss{border-color:rgba(255,64,0,.6)}
+.rate .who{display:flex;gap:12px;align-items:center;min-width:0}
+.rate .av{width:46px;height:46px;font-size:15px}
+.rate .ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(255,64,0,.1);border:1px solid rgba(255,64,0,.35);color:var(--orange);flex:none}
+.rate .ic svg{width:22px;height:22px}
+.rate b{display:block;font-size:14.5px;line-height:1.3}
+.rate span.s{display:block;font-size:12.5px;color:var(--faint)}
+.rate .ctl{display:flex;align-items:center;gap:6px}
+.stars{display:flex;gap:2px}
+.stars button{width:36px;height:36px;border:0;background:none;padding:0;color:rgba(255,255,255,.22);display:grid;place-items:center}
+.stars button svg{width:26px;height:26px;fill:currentColor;stroke:none}
+.stars button.on{color:var(--orange)}
+.na{border:1px solid var(--line2);background:transparent;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:600;color:var(--dim);white-space:nowrap}
+.na[aria-pressed="true"]{border-color:var(--fg);color:var(--fg);background:rgba(255,255,255,.08)}
+@media (max-width:620px){.rate{grid-template-columns:1fr}.rate .ctl{justify-content:space-between}}
 .done{text-align:center;display:grid;justify-items:center;gap:12px;padding:clamp(36px,6vw,64px) 24px}
 .done .ok{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(255,64,0,.12);border:1px solid rgba(255,64,0,.45);color:var(--orange)}
 .done .ok svg{width:28px;height:28px}
@@ -307,6 +339,8 @@ footer img{height:18px;width:auto}
   <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></symbol>
   <symbol id="i-slides" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8M7 12l3-3 2.5 2.5L17 7"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-food" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M4.5 3v5a2.5 2.5 0 0 0 5 0V3M7 11v10M17 21V3c-2.2 1.2-3.5 3.6-3.5 7 0 2 1 3 3.5 3"/></symbol>
+  <symbol id="i-starf" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
 </svg>
 
@@ -342,7 +376,7 @@ footer img{height:18px;width:auto}
   <div class="ph hero">
     <p class="label">Paddock · CDMX</p>
     <h1 id="h-quien">Quién está <em>aquí.</em></h1>
-    <p>Speakers y emprendedores digitales de Titanium y NOVA 30 que están en el encuentro contigo. Presiona una tarjeta para ver su perfil completo.</p>
+    <p>Emprendedores digitales, speakers y equipo de Hotmart que están en el encuentro contigo. Crea tu perfil para aparecer y presiona cualquier tarjeta para ver el perfil completo.</p>
   </div>
 
   <label class="search"><span class="sr">Buscar por nombre</span>
@@ -351,9 +385,9 @@ footer img{height:18px;width:auto}
   </label>
   <div class="filters" role="group" aria-label="Filtrar">
     <button class="chipb" data-f="all" aria-pressed="true">Todos<b data-c="all"></b></button>
-    <button class="chipb" data-f="speaker" aria-pressed="false">Speakers<b data-c="speaker"></b></button>
     <button class="chipb" data-f="Titanium" aria-pressed="false">Titanium<b data-c="Titanium"></b></button>
     <button class="chipb" data-f="NOVA 30" aria-pressed="false">NOVA 30<b data-c="NOVA 30"></b></button>
+    <button class="chipb" data-f="Speaker" aria-pressed="false">Speakers<b data-c="Speaker"></b></button>
     <button class="chipb" data-f="Invitado" aria-pressed="false">Invitados<b data-c="Invitado"></b></button>
   </div>
 
@@ -365,20 +399,55 @@ footer img{height:18px;width:auto}
   <div class="ph">
     <p class="label">Cronograma</p>
     <h1 id="h-cron">Cuatro días, <em>una carrera.</em></h1>
-    <p>La agenda completa, día por día. Lo que está pasando ahora se marca solo.</p>
+    <p>La agenda completa, día por día. Lo que está pasando ahora se marca solo. Los días de carrera salimos a las 9:00 del Ángel de la Independencia y regresamos a las 18:00.</p>
   </div>
 
   <div class="box venue">
     <span class="ic"><svg><use href="#i-pin"/></svg></span>
     <div>
-      <p class="label">Dónde es hoy</p>
-      <h2>Público Reforma</h2>
-      <p>Av. Paseo de la Reforma 333, piso 7 · CDMX</p>
+      <p class="label" id="v-lbl">Dónde es hoy</p>
+      <h2 id="v-name">Público Reforma</h2>
+      <p id="v-addr">Av. Paseo de la Reforma 333, piso 7 · CDMX</p>
     </div>
-    <a class="btn-line" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=P%C3%BAblico+Reforma%2C+Av.+Paseo+de+la+Reforma+333%2C+Ciudad+de+M%C3%A9xico"><svg><use href="#i-nav"/></svg>Cómo llegar</a>
+    <a class="btn-line" id="v-map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=P%C3%BAblico+Reforma%2C+Av.+Paseo+de+la+Reforma+333%2C+Ciudad+de+M%C3%A9xico"><svg><use href="#i-nav"/></svg>Cómo llegar</a>
   </div>
 
   <div class="days" id="days"></div>
+
+  <div class="bring" id="llevar">
+    <p class="label">Días de carrera</p>
+    <h2 class="sec-h" style="font-family:var(--font-display);font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.08;margin-top:10px">Qué sí y qué no puedes llevar al autódromo.</h2>
+    <div class="cols">
+      <div class="box yes">
+        <h3><i>✓</i>Sí puedes llevar</h3>
+        <ul>
+          <li><b>Bolsas de mano o cangureras</b> de máximo 11 × 23 cm</li>
+          <li><b>Mochilas pequeñas</b></li>
+          <li><b>Cámaras</b> con lente de máximo 300 mm</li>
+          <li>Cámaras GoPro</li><li>Baterías externas</li><li>Bloqueador solar</li><li>Lentes de sol</li>
+          <li>Sombreros y gorras</li><li>Chamarras</li><li>Impermeables</li><li>Botas de lluvia</li>
+          <li>Paraguas pequeños sin punta</li><li>Tapones para oídos</li><li>Gel antibacterial</li>
+          <li>Medicamentos con receta</li><li>Binoculares sin láser</li><li>Bolsas ziploc</li>
+          <li>Cascos de motocicleta</li><li>Pancartas del evento</li><li>Alimentos para bebé</li><li>Carriolas pequeñas</li>
+        </ul>
+      </div>
+      <div class="box no">
+        <h3><i>✕</i>No está permitido</h3>
+        <ul>
+          <li><b>Mochilas grandes</b> de más de 30 cm</li>
+          <li><b>Comida o bebidas</b></li>
+          <li><b>Cigarros y vapeadores</b></li><li>Encendedores</li>
+          <li>Botellas de vidrio y latas</li><li>Hieleras</li><li>Aerosoles</li>
+          <li>Equipo profesional de video</li><li>Palos de selfie o GoPro</li><li>Drones</li>
+          <li>Banderas con palos</li><li>Cadenas y cinturones</li><li>Objetos punzocortantes</li>
+          <li>Armas</li><li>Bombas o bengalas</li><li>Rayos láser o luz química</li>
+          <li>Cobijas</li><li>Pelotas o frisbees</li><li>Muñecos de peluche</li><li>Instrumentos musicales</li>
+          <li>Bicicletas y patinetas</li><li>Mascotas</li><li>Sustancias ilegales</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">Lista oficial del autódromo. Los alimentos del grupo ya están incluidos.</p>
+  </div>
 </section>
 
 <!-- ============ EVALUACIÓN ============ -->
@@ -386,7 +455,7 @@ footer img{height:18px;width:auto}
   <div class="ph">
     <p class="label">Evaluación</p>
     <h1 id="h-eval">¿Cómo te fue <em>hoy?</em></h1>
-    <p>Son tres preguntas y toma menos de un minuto. Con tus respuestas diseñamos los próximos encuentros.</p>
+    <p>Califica el encuentro, cada ponencia y la comida. Toma dos minutos y con tus respuestas diseñamos los próximos encuentros.</p>
   </div>
 
   <form id="evalForm" class="box" novalidate>
@@ -396,8 +465,9 @@ footer img{height:18px;width:auto}
       <div class="nps-l"><span>Nada probable</span><span>Muy probable</span></div>
     </div>
     <div class="field">
-      <span class="lbl">¿Qué ponencias te dejaron más? <small style="font-weight:400">Puedes elegir varias.</small></span>
-      <div class="picks" id="picks"></div>
+      <span class="lbl">Califica cada ponencia y la comida del 1 al 5</span>
+      <small>Si no la viste, presiona “No la vi”.</small>
+      <div class="rates" id="rates"></div>
     </div>
     <div class="field">
       <label for="e-best">¿Qué te llevas para aplicar en tu negocio?</label>
@@ -407,7 +477,7 @@ footer img{height:18px;width:auto}
       <label for="e-better">¿Qué mejorarías para el próximo encuentro?</label>
       <textarea class="ta" id="e-better" maxlength="500" placeholder="Opcional"></textarea>
     </div>
-    <p class="note warn" id="evalErr" hidden>Elige una calificación del 0 al 10 para enviar.</p>
+    <p class="note warn" id="evalErr" hidden></p>
     <div style="margin-top:22px"><button class="btn lg" type="submit" id="evalBtn" style="width:100%">Enviar evaluación</button></div>
   </form>
 
@@ -497,7 +567,7 @@ footer img{height:18px;width:auto}
           <label for="f-com">Comunidad</label>
           <select class="sel" id="f-com">
             <option value="">Elige una opción</option>
-            <option>Titanium</option><option>NOVA 30</option><option>Invitado</option><option>Equipo Hotmart</option>
+            <option>Titanium</option><option>NOVA 30</option><option>Speaker</option><option>Invitado</option><option>Equipo Hotmart</option>
           </select>
         </div>
         <div class="field">
@@ -608,23 +678,43 @@ const DAYS = [
       { s:"18:50", e:"19:00", t:"Foto grupal y evaluación", d:"Responde la evaluación aquí en la app.", link:"#evaluacion" },
       { s:"19:00", e:"21:00", t:"Cena", d:"En la misma sede · solo presencial" }
     ]},
-  { key:"2026-10-30", n:"Día 2", date:"Vie, 30 de octubre", title:"Carrera",
-    where:"Autódromo Hermanos Rodríguez · salida desde el Ángel de la Independencia",
+  { key:"2026-10-30", n:"Día 2", date:"Vie, 30 de octubre", title:"Prácticas", race:true,
+    where:"Autódromo Hermanos Rodríguez · Salida 9:00 desde el Ángel de la Independencia · Regreso 18:00",
     slots:[
-      { s:"07:30", e:"08:00", t:"Punto de encuentro", d:"Ángel de la Independencia. Lleva tu acreditación." },
-      { s:"08:00", e:"18:00", t:"Día en el autódromo", d:"Alimentos incluidos. Regreso en el transporte del grupo." }
+      { s:"08:40", e:"09:00", t:"GTM Super Copa", d:"Sesión de práctica", track:true },
+      { s:"09:00", e:"09:40", t:"Salida al autódromo", d:"Ángel de la Independencia. Lleva tu acreditación.", go:true, track:true },
+      { s:"09:40", e:"10:30", t:"Masters Historic", d:"Sesión de práctica", track:true },
+      { s:"10:30", e:"12:30", t:"F4 NACAM Championship", d:"Sesión de práctica", track:true },
+      { s:"12:30", e:"14:00", t:"Práctica 1", d:"Categoría principal", hl:true, track:true },
+      { s:"14:00", e:"16:00", t:"GTM Super Copa", d:"Clasificación", track:true },
+      { s:"16:00", e:"17:30", t:"Práctica 2", d:"Categoría principal", hl:true, track:true },
+      { s:"17:30", e:"18:00", t:"Masters Historic", d:"Clasificación", track:true },
+      { s:"18:00", e:"19:00", t:"Regreso", d:"Salida del autódromo de vuelta al Ángel.", go:true, track:true }
     ]},
-  { key:"2026-10-31", n:"Día 3", date:"Sáb, 31 de octubre", title:"Carrera",
-    where:"Autódromo Hermanos Rodríguez · salida desde el Ángel de la Independencia",
+  { key:"2026-10-31", n:"Día 3", date:"Sáb, 31 de octubre", title:"Clasificación", race:true,
+    where:"Autódromo Hermanos Rodríguez · Salida 9:00 desde el Ángel de la Independencia · Regreso 18:00",
     slots:[
-      { s:"07:30", e:"08:00", t:"Punto de encuentro", d:"Ángel de la Independencia. Lleva tu acreditación." },
-      { s:"08:00", e:"18:00", t:"Día en el autódromo", d:"Alimentos incluidos. Regreso en el transporte del grupo." }
+      { s:"09:00", e:"09:25", t:"Salida al autódromo", d:"Ángel de la Independencia. Lleva tu acreditación.", go:true, track:true },
+      { s:"09:25", e:"10:15", t:"F4 NACAM Championship", d:"Clasificación", track:true },
+      { s:"10:15", e:"11:30", t:"Masters Historic", d:"Primera carrera", track:true },
+      { s:"11:30", e:"12:55", t:"Práctica 3", d:"Categoría principal", hl:true, track:true },
+      { s:"12:55", e:"15:00", t:"GTM Super Copa", d:"Primera carrera", track:true },
+      { s:"15:00", e:"16:45", t:"Clasificación", d:"Categoría principal", hl:true, track:true },
+      { s:"16:45", e:"18:00", t:"F4 NACAM Championship", d:"Primera carrera", track:true },
+      { s:"18:00", e:"19:00", t:"Regreso", d:"Salida del autódromo de vuelta al Ángel.", go:true, track:true }
     ]},
-  { key:"2026-11-01", n:"Día 4", date:"Dom, 1 de noviembre", title:"Día de la carrera",
-    where:"Autódromo Hermanos Rodríguez · salida desde el Ángel de la Independencia",
+  { key:"2026-11-01", n:"Día 4", date:"Dom, 1 de noviembre", title:"Día de la carrera", race:true,
+    where:"Autódromo Hermanos Rodríguez · Salida 9:00 desde el Ángel de la Independencia · Regreso 18:00",
     slots:[
-      { s:"07:30", e:"08:00", t:"Punto de encuentro", d:"Ángel de la Independencia. Lleva tu acreditación." },
-      { s:"08:00", e:"18:00", t:"Día en el autódromo", d:"Alimentos incluidos. Regreso en el transporte del grupo." }
+      { s:"09:00", e:"09:05", t:"Salida al autódromo", d:"Ángel de la Independencia. Lleva tu acreditación.", go:true, track:true },
+      { s:"09:05", e:"10:05", t:"GTM Super Copa", d:"Segunda carrera", track:true },
+      { s:"10:05", e:"11:05", t:"Masters Historic", d:"Segunda carrera", track:true },
+      { s:"11:05", e:"12:00", t:"F4 NACAM Championship", d:"Segunda carrera", track:true },
+      { s:"12:00", e:"12:30", t:"Desfile de pilotos", d:"Categoría principal", hl:true, track:true },
+      { s:"12:30", e:"13:44", t:"Ceremonia de apertura", d:"Categoría principal", hl:true, track:true },
+      { s:"13:44", e:"14:00", t:"Himno Nacional", d:"Categoría principal", hl:true, track:true },
+      { s:"14:00", e:"18:00", t:"La gran carrera", d:"Gran Premio de la Ciudad de México", hl:true, track:true },
+      { s:"18:00", e:"19:00", t:"Regreso", d:"Salida del autódromo de vuelta al Ángel.", go:true, track:true }
     ]}
 ];
 
@@ -692,10 +782,6 @@ let ME = store.get("pd_me", null);     // perfil propio
 let PEOPLE = [];                        // perfiles de asistentes
 let FILTER = "all";
 
-function speakerAsPerson(s){
-  return { kind:"speaker", id:s.id, name:s.n, project:s.rol, tema:s.tema, country:s.c, bio:s.bio, photo:`https://digital.hotmartcomunidades.com/img/speakers/${s.id}.jpg`, community:"Speaker" };
-}
-
 /* ===================== ROUTER ===================== */
 const ROUTES = ["quien","cronograma","evaluacion","material","perfil"];
 function route(){
@@ -732,54 +818,41 @@ function renderStrip(){
 
 /* ===================== QUIÉN ES QUIÉN ===================== */
 function allPeople(){
-  const sps = SPEAKERS.map(speakerAsPerson);
-  const atts = PEOPLE.map(p => ({ ...p, kind:"att" }))
+  return PEOPLE.map(p => ({ ...p, kind: p.community === "Speaker" ? "speaker" : "att" }))
     .sort((a,b) => a.name.localeCompare(b.name, "es"));
-  return { sps, atts };
 }
 function match(p, q){
   if (!q) return true;
-  const h = [p.name,p.project,p.country,p.ig,p.bio].join(" ").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+  const h = [p.name,p.project,p.country,p.ig,p.bio].join(" ").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
   return h.includes(q);
 }
-function card(p){
-  const tag = p.kind === "speaker" ? `<span class="tag sp">Speaker</span>`
+function tagFor(p){
+  return p.community === "Speaker" ? `<span class="tag sp">Speaker</span>`
     : p.community === "Titanium" ? `<span class="tag ti"><img src="https://assets.hotmartcomunidades.com/orbs/badge-titanium.svg" alt="">Titanium</span>`
-    : p.community === "NOVA 30" ? `<span class="tag">NOVA 30</span>`
     : p.community ? `<span class="tag">${esc(p.community)}</span>` : "";
-  const ring = p.kind === "speaker" ? "ring" : p.community === "Titanium" ? "ring ti" : "ring";
+}
+function card(p){
+  const ring = p.community === "Titanium" ? "ring ti" : "ring";
   return `<article class="person" tabindex="0" role="button" data-id="${esc(p.id)}" aria-label="Ver perfil de ${esc(p.name)}">
     ${avatar(p, ring)}
     <h3>${esc(p.name)}</h3>
-    <div class="meta">${tag}${p.country ? `<span>${flag(p.country)} ${esc(p.country)}</span>` : ""}</div>
-    <p class="bio">${esc(p.kind === "speaker" ? p.project : (p.bio || p.project || ""))}</p>
+    <div class="meta">${tagFor(p)}${p.country ? `<span>${flag(p.country)} ${esc(p.country)}</span>` : ""}</div>
+    <p class="bio">${esc(p.bio || p.project || "")}</p>
     <span class="go">Ver perfil <svg width="14" height="14"><use href="#i-arrow"/></svg></span>
   </article>`;
 }
 function renderPeople(){
-  const q = $("#q").value.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().trim();
-  const { sps, atts } = allPeople();
-  const all = [...sps, ...atts];
-  const counts = { all: all.length, speaker: sps.length };
-  ["Titanium","NOVA 30","Invitado"].forEach(c => counts[c] = atts.filter(a => a.community === c).length);
+  const q = $("#q").value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+  const all = allPeople();
+  const counts = { all: all.length };
+  ["Titanium","NOVA 30","Speaker","Invitado"].forEach(c => counts[c] = all.filter(a => a.community === c).length);
   $$("[data-c]").forEach(b => b.textContent = counts[b.dataset.c] || "");
-
-  const inF = p => FILTER === "all" || (FILTER === "speaker" ? p.kind === "speaker" : p.community === FILTER);
-  const S = sps.filter(p => inF(p) && match(p,q));
-  const A = atts.filter(p => inF(p) && match(p,q));
-  const hasMe = ME && PEOPLE.some(p => p.id === ME.id || (p.email && p.email === ME.email));
-
+  const list = all.filter(p => (FILTER === "all" || p.community === FILTER) && match(p,q));
+  const hasMe = ME && PEOPLE.some(p => p.id === ME.id);
   let html = "";
-  if (S.length){
-    html += `<div class="subh" style="grid-column:1/-1;margin-top:0"><h2>Speakers</h2><span>${S.length} en el escenario</span></div>`;
-    html += S.map(card).join("");
-  }
-  if (FILTER !== "speaker"){
-    html += `<div class="subh" style="grid-column:1/-1"><h2>Emprendedores digitales</h2><span>${atts.length ? `${atts.length} con perfil` : "Sé el primero"}</span></div>`;
-    if (!hasMe && !q) html += `<div class="join"><p class="label">Aún no apareces</p><h3>Crea tu perfil y que te encuentren.</h3><p>Toma un minuto: escribe tu Instagram y nosotros traemos tu foto y tu bio.</p><a class="btn" href="#perfil">Crear mi perfil</a></div>`;
-    html += A.map(card).join("");
-    if (!A.length && q) html += `<div class="empty" style="grid-column:1/-1">No encontramos a nadie con “${esc($("#q").value)}”.</div>`;
-  }
+  if (!hasMe && !q) html += `<div class="join"><p class="label">${all.length ? "Aún no apareces" : "Sé el primero"}</p><h3>Crea tu perfil y que te encuentren.</h3><p>Toma un minuto: escribe tu Instagram y nosotros traemos tu foto y tu bio.</p><a class="btn" href="#perfil">Crear mi perfil</a></div>`;
+  html += list.map(card).join("");
+  if (!list.length && (q || FILTER !== "all")) html += `<div class="empty" style="grid-column:1/-1">${q ? `No encontramos a nadie con “${esc($("#q").value)}”.` : "Todavía no hay perfiles en esta categoría."}</div>`;
   $("#people").innerHTML = html;
 }
 $("#q").addEventListener("input", renderPeople);
@@ -790,14 +863,9 @@ $("#people").addEventListener("click", e => { const c = e.target.closest(".perso
 $("#people").addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("person")){ e.preventDefault(); openPerson(e.target.dataset.id); } });
 
 function openPerson(id){
-  const { sps, atts } = allPeople();
-  const p = [...sps, ...atts].find(x => x.id === id); if (!p) return;
-  const slot = p.kind === "speaker" ? DAYS[0].slots.find(s => s.sp === p.id) : null;
-  const tags = [
-    p.kind === "speaker" ? `<span class="tag sp">Speaker</span>` : p.community ? `<span class="tag ${p.community === "Titanium" ? "ti" : ""}">${esc(p.community)}</span>` : "",
-    p.country ? `<span class="tag">${flag(p.country)} ${esc(p.country)}</span>` : "",
-    slot ? `<span class="tag">Jue 29 · ${fmt12(slot.s)} hrs</span>` : ""
-  ].join("");
+  const p = allPeople().find(x => x.id === id); if (!p) return;
+  const tags = [tagFor(p), p.country ? `<span class="tag">${flag(p.country)} ${esc(p.country)}</span>` : ""].join("");
+  const slot = null;
   $("#dlgBody").innerHTML = `
     <button class="x" type="button" aria-label="Cerrar" data-close><svg><use href="#i-x"/></svg></button>
     <div class="hd">${avatar(p, "ring")}<div>
@@ -805,8 +873,7 @@ function openPerson(id){
       ${p.ig ? `<a class="handle" href="https://instagram.com/${encodeURIComponent(p.ig)}" target="_blank" rel="noopener">@${esc(p.ig)}</a>` : p.project ? `<p class="muted" style="margin-top:4px">${esc(p.project)}</p>` : ""}
       <div class="tags">${tags}</div>
     </div></div>
-    ${p.kind !== "speaker" && p.project ? `<div class="sec"><p class="label">Proyecto</p><p>${esc(p.project)}</p></div>` : ""}
-    ${p.tema ? `<div class="sec"><p class="label">Ponencia</p><p>${esc(p.tema)}</p></div>` : ""}
+    ${p.project ? `<div class="sec"><p class="label">Proyecto</p><p>${esc(p.project)}</p></div>` : ""}
     ${p.bio ? `<div class="sec"><p class="label">Bio</p><p>${esc(p.bio)}</p></div>` : ""}
     ${p.help ? `<div class="sec"><p class="label">Puede ayudarte con</p><p>${esc(p.help)}</p></div>` : ""}
     <div class="acts">
@@ -820,6 +887,12 @@ $("#dlg").addEventListener("click", e => { if (e.target.id === "dlg" || e.target
 /* ===================== CRONOGRAMA ===================== */
 function renderDays(){
   const { day, min } = nowMX();
+  if (day >= "2026-10-30" && day <= "2026-11-01"){
+    $("#v-lbl").textContent = "Punto de salida hoy · 9:00 hrs";
+    $("#v-name").textContent = "Ángel de la Independencia";
+    $("#v-addr").textContent = "Paseo de la Reforma · Regreso a las 18:00 hrs";
+    $("#v-map").href = "https://www.google.com/maps/search/?api=1&query=%C3%81ngel+de+la+Independencia%2C+Ciudad+de+M%C3%A9xico";
+  }
   const openKey = DAYS.some(d => d.key === day) ? day : (day < DAYS[0].key ? DAYS[0].key : null);
   $("#days").innerHTML = DAYS.map(d => {
     const isToday = d.key === day, isPast = d.key < day;
@@ -830,7 +903,8 @@ function renderDays(){
       const what = S
         ? `<div class="who">${avatar({ name:S.n, photo:`https://digital.hotmartcomunidades.com/img/speakers/${S.id}.jpg` })}<div>${now ? `<span class="live"><i></i>En el escenario</span>` : ""}<b>${esc(s.t || S.n)}</b><span>${esc(s.d || (S.tema || S.rol))}</span></div></div>`
         : `<div>${now ? `<span class="live"><i></i>Ahora</span>` : ""}<b>${esc(s.t)}</b>${s.d ? `<span>${s.link ? `<a href="${s.link}" style="color:var(--orange);font-weight:700;text-decoration:none">${esc(s.d)}</a>` : esc(s.d)}</span>` : ""}</div>`;
-      return `<li class="slot${now ? " now" : ""}${past ? " past" : ""}"><span class="h">${fmt12(s.s)}<small>a ${fmt12(s.e)} hrs</small></span>${what}</li>`;
+      const showEnd = !s.track || s.go;
+      return `<li class="slot${now ? " now" : ""}${past ? " past" : ""}${s.hl ? " hl" : ""}${s.go ? " go" : ""}"><span class="h">${fmt12(s.s)}${showEnd && !s.track ? `<small>a ${fmt12(s.e)} hrs</small>` : `<small>hrs</small>`}</span>${what}</li>`;
     }).join("");
     return `<details class="day" ${d.key === openKey ? "open" : ""}>
       <summary><span class="ttl"><h3>${d.n} · ${esc(d.title)}</h3><span class="d">${esc(d.date)}</span>${isToday ? `<span class="today">Hoy</span>` : ""}</span><svg class="chev"><use href="#i-chev"/></svg></summary>
@@ -840,21 +914,40 @@ function renderDays(){
 }
 
 /* ===================== EVALUACIÓN ===================== */
-let NPS = null; const PICKS = new Set();
+let NPS = null; const RATES = {};
+const RATE_ITEMS = [
+  ...DAYS[0].slots.filter(x => x.sp).map(x => { const S = sp(x.sp); return { id:S.id, title: x.t || S.n, sub: x.t ? x.d : (S.tema || S.rol), photo:`https://digital.hotmartcomunidades.com/img/speakers/${S.id}.jpg`, name:S.n, label: x.t ? `${x.t} (${x.d})` : S.n }; }),
+  { id:"comida", title:"La comida", sub:"Break y cena", icon:"i-food", label:"Comida", na:"No aplica" }
+];
 $("#nps").innerHTML = Array.from({ length:11 }, (_, i) => `<button type="button" role="radio" aria-checked="false" aria-pressed="false" data-v="${i}">${i}</button>`).join("");
 $("#nps").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; NPS = +b.dataset.v;
-  $$("#nps button").forEach(x => { const on = x === b; x.setAttribute("aria-pressed", on); x.setAttribute("aria-checked", on); }); $("#evalErr").hidden = true; });
-$("#picks").innerHTML = SPEAKERS.map(s => `<button type="button" class="pick" aria-pressed="false" data-id="${s.id}">${avatar({ name:s.n, photo:`https://digital.hotmartcomunidades.com/img/speakers/${s.id}.jpg` })}${esc(s.id === "steven-zamora" ? "Launchpad · Steven y Paula" : s.n)}</button>`).join("");
-$("#picks").addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return;
-  const on = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", on); on ? PICKS.add(b.dataset.id) : PICKS.delete(b.dataset.id); });
+  $$("#nps button").forEach(x => { const on = x === b; x.setAttribute("aria-pressed", on); x.setAttribute("aria-checked", on); }); });
+$("#rates").innerHTML = RATE_ITEMS.map(it => `<div class="rate" data-id="${it.id}">
+  <div class="who">${it.icon ? `<span class="ic"><svg><use href="#${it.icon}"/></svg></span>` : avatar({ name:it.name, photo:it.photo })}<div><b>${esc(it.title)}</b><span class="s">${esc(it.sub || "")}</span></div></div>
+  <div class="ctl"><div class="stars" role="radiogroup" aria-label="Calificación de ${esc(it.title)}">${[1,2,3,4,5].map(n => `<button type="button" data-v="${n}" aria-label="${n} de 5"><svg><use href="#i-starf"/></svg></button>`).join("")}</div>
+  <button type="button" class="na" aria-pressed="false">${it.na || "No la vi"}</button></div>
+</div>`).join("");
+$("#rates").addEventListener("click", e => {
+  const row = e.target.closest(".rate"); if (!row) return; const id = row.dataset.id;
+  const st = e.target.closest(".stars button"), na = e.target.closest(".na");
+  if (st){ RATES[id] = +st.dataset.v; row.querySelector(".na").setAttribute("aria-pressed","false"); }
+  else if (na){ RATES[id] = null; na.setAttribute("aria-pressed","true"); }
+  else return;
+  row.querySelectorAll(".stars button").forEach(b => b.classList.toggle("on", RATES[id] != null && +b.dataset.v <= RATES[id]));
+  row.classList.remove("miss");
+});
 $("#evalForm").addEventListener("submit", async e => {
   e.preventDefault();
-  if (NPS === null){ $("#evalErr").hidden = false; $("#nps button").focus(); return; }
+  const err = $("#evalErr"); const missing = RATE_ITEMS.filter(it => !(it.id in RATES));
+  $$(".rate").forEach(r => r.classList.toggle("miss", missing.some(m => m.id === r.dataset.id)));
+  if (NPS === null){ err.textContent = "Elige una calificación del 0 al 10 para el encuentro."; err.hidden = false; $("#nps").scrollIntoView({ behavior:"smooth", block:"center" }); return; }
+  if (missing.length){ err.textContent = `Te falta calificar: ${missing.map(m => m.title).join(", ")}.`; err.hidden = false; $(`.rate[data-id="${missing[0].id}"]`).scrollIntoView({ behavior:"smooth", block:"center" }); return; }
+  err.hidden = true;
   const btn = $("#evalBtn"); btn.disabled = true; btn.innerHTML = `<span class="spin"></span>`;
   try{
-    await API.saveEval({ nps:NPS, speakers:[...PICKS].map(id => id === "steven-zamora" ? "Lanzamiento Launchpad (Steven Zamora y Paula Lopes)" : sp(id).n), take:$("#e-best").value.trim(), improve:$("#e-better").value.trim(), email: ME?.email || "", name: ME?.name || "", ts:new Date().toISOString() });
+    await API.saveEval({ nps:NPS, ratings:RATES, take:$("#e-best").value.trim(), improve:$("#e-better").value.trim(), email: ME?.email || "", name: ME?.name || "" });
     store.set("pd_eval_done", true); showEvalDone();
-  }catch(err){ btn.disabled = false; btn.textContent = "Enviar evaluación"; $("#evalErr").textContent = "No pudimos enviar tu evaluación. Intenta de nuevo."; $("#evalErr").hidden = false; }
+  }catch(x){ btn.disabled = false; btn.textContent = "Enviar evaluación"; err.textContent = "No pudimos enviar tu evaluación. Intenta de nuevo."; err.hidden = false; }
 });
 function showEvalDone(){ $("#evalForm").hidden = true; $("#evalDone").hidden = false; }
 

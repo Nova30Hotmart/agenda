@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 
 export const sha = s => createHash("sha256").update(String(s)).digest("hex").slice(0, 24);
 export const clean = (v, n = 300) => (typeof v === "string" ? v.trim().slice(0, n) : "");
-export const COMMUNITIES = ["Titanium", "NOVA 30", "Invitado", "Equipo Hotmart"];
+export const COMMUNITIES = ["Titanium", "NOVA 30", "Speaker", "Invitado", "Equipo Hotmart"];
 
 export async function readBody(req) {
   if (req.body && typeof req.body === "object") return req.body;
