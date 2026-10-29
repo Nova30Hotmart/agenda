@@ -13,6 +13,7 @@ Producción: https://agenda.hotmartcomunidades.com · Vercel: proyecto `agenda` 
 - `POST /api/profile` · crea o actualiza un perfil (la llave es el correo). Copia la foto al Blob.
 - `POST /api/eval` · guarda una evaluación (NPS, ponencias, comentarios).
 - `GET /api/instagram?u=usuario` · Business Discovery de Meta. Requiere `IG_USER_ID` e `IG_TOKEN` en Vercel.
-- `GET /api/export?key=EXPORT_KEY&t=profiles|evals` · descarga CSV.
+- `GET /api/export?key=EXPORT_KEY&t=profiles|evals` · descarga CSV (agrega `&f=json` para JSON).
+- `GET /api/admin?key=EXPORT_KEY&profile=<id>` o `&eval=<file>` · borra un perfil o una evaluación.
 
 Variables en Vercel: `BLOB_READ_WRITE_TOKEN` (automática), `EXPORT_KEY`, `IG_USER_ID`, `IG_TOKEN`.

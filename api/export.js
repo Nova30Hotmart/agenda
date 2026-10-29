@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     rows = (await Promise.all(latest.map(b => getJSON(b.url)))).filter(Boolean);
   } else {
     const blobs = await listAll("evals/");
-    rows = (await Promise.all(blobs.map(b => getJSON(b.url)))).filter(Boolean).sort((a, b) => a.ts.localeCompare(b.ts));
+    rows = (await Promise.all(blobs.map(async b => { const j = await getJSON(b.url); return j && { file: b.pathname.split("/")[1].split("-")[0].replace(".json", ""), ...j }; }))).filter(Boolean).sort((a, b) => a.ts.localeCompare(b.ts));
   }
   if (req.query.f === "json") return res.status(200).json({ rows });
   res.setHeader("Content-Type", "text/csv; charset=utf-8");
