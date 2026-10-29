@@ -1,4 +1,4 @@
-import { readBody, clean, sha, putJSON, put, del, listAll, COMMUNITIES } from "./_lib.js";
+import { readBody, clean, sha, putJSON, put, del, listAll } from "./_lib.js";
 
 const MAX_PHOTO = 1.5 * 1024 * 1024;
 
@@ -41,7 +41,6 @@ export default async function handler(req, res) {
       ig: clean(d.ig, 40).replace(/^@/, "").replace(/[^a-zA-Z0-9._]/g, ""),
       project: clean(d.project, 80),
       country: clean(d.country, 40),
-      community: COMMUNITIES.includes(d.community) ? d.community : "",
       bio: clean(d.bio, 220),
       help: clean(d.help, 140),
       photo,

@@ -161,13 +161,10 @@ main{min-height:70vh}
 .savebar .btn{width:100%;padding-block:17px;font-size:16px;box-shadow:0 18px 40px -12px rgba(255,64,0,.55)}
 
 /* ---------- Quién es quién ---------- */
-.search{position:relative;margin-bottom:16px}
+.search{position:relative;display:block;margin-bottom:24px}
 .search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--faint)}
 .search .in{padding-left:46px;border-radius:2px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
-.chipb{border:1px solid var(--line2);background:transparent;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--dim)}
-.chipb[aria-pressed="true"]{color:var(--fg);border-color:rgba(255,64,0,.6);background:rgba(255,64,0,.12)}
-.chipb b{font-weight:600;color:var(--faint);margin-left:4px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
 .person{position:relative;display:grid;justify-items:center;text-align:center;gap:10px;padding:26px 20px 20px;background:var(--card);border:1px solid var(--line);border-radius:16px;cursor:pointer;transition:border-color .25s,transform .25s,background .25s;overflow:hidden}
 .person:hover,.person:focus-visible{border-color:rgba(255,64,0,.45);transform:translateY(-2px);outline:none}
@@ -212,7 +209,26 @@ dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
 .venue h2{font-size:21px;margin-top:4px}
 .venue p{font-size:14.5px;color:var(--dim)}
 @media (max-width:620px){.venue{grid-template-columns:auto 1fr}.venue .btn-line{grid-column:1/-1}}
-.days{margin-top:22px;border-top:1px solid var(--line)}
+.daytabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:14px;align-items:stretch}
+.daytabs .dtab{aspect-ratio:auto;min-height:0;height:auto;padding-block:16px 18px}
+.dtab{position:relative;display:grid;justify-items:center;align-content:center;gap:2px;padding:14px 12px 16px;border-radius:14px;border:1px solid var(--line2);background:var(--card);text-align:center;transition:border-color .2s,background .2s,transform .2s}
+.dtab:hover{border-color:rgba(255,255,255,.3)}
+.dtab .wd{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);display:flex;gap:8px;align-items:center;justify-content:center;min-height:18px}
+.dtab .num{font-family:var(--font-display);font-size:clamp(30px,4vw,42px);line-height:1;letter-spacing:-.03em;margin-top:4px}
+.dtab .mo{font-size:12px;color:var(--faint);text-transform:uppercase;letter-spacing:.1em}
+.dtab .tt{margin-top:8px;font-size:13.5px;font-weight:700;color:var(--dim)}
+.dtab.on{border-color:var(--orange);background:radial-gradient(140% 120% at 0% 0%,rgba(255,64,0,.2),var(--card) 65%);box-shadow:0 18px 40px -24px rgba(255,64,0,.7)}
+.dtab.on .num,.dtab.on .tt{color:var(--fg)}
+.dtab.on .wd{color:var(--orange)}
+.dtab.done:not(.on){opacity:.55}
+.tdot{font-style:normal;font-size:9.5px;letter-spacing:.12em;padding:2px 7px;border-radius:999px;background:var(--orange);color:#fff}
+@media (max-width:620px){.daytabs{gap:6px}.dtab{padding:10px 8px 12px;justify-items:center;text-align:center;border-radius:12px}.dtab .wd{flex-direction:column;gap:4px}.dtab .tt{font-size:11.5px;margin-top:6px}.dtab .num{font-size:28px}}
+.days{margin-top:26px}
+.dayhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.dayhead h3{font-family:var(--font-display);font-size:clamp(22px,2.6vw,28px);line-height:1.1}
+.dayhead .d{font-size:14px;font-weight:700;color:var(--orange)}
+.days .where{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--dim);margin-bottom:14px}
+.days .where svg{width:16px;height:16px;color:var(--orange);flex:none}
 .day{border-bottom:1px solid var(--line)}
 .day summary{list-style:none;display:flex;align-items:center;gap:14px;padding:20px 4px;cursor:pointer}
 .day summary::-webkit-details-marker{display:none}
@@ -376,20 +392,14 @@ footer img{height:18px;width:auto}
   <div class="ph hero">
     <p class="label">Paddock · CDMX</p>
     <h1 id="h-quien">Quién está <em>aquí.</em></h1>
-    <p>Emprendedores digitales, speakers y equipo de Hotmart que están en el encuentro contigo. Crea tu perfil para aparecer y presiona cualquier tarjeta para ver el perfil completo.</p>
+    <p>Todos los que están en el encuentro contigo. Crea tu perfil para aparecer y presiona cualquier tarjeta para ver el perfil completo.</p>
   </div>
 
   <label class="search"><span class="sr">Buscar por nombre</span>
     <svg><use href="#i-search"/></svg>
     <input class="in" id="q" type="search" placeholder="Buscar por nombre, proyecto o país" autocomplete="off">
   </label>
-  <div class="filters" role="group" aria-label="Filtrar">
-    <button class="chipb" data-f="all" aria-pressed="true">Todos<b data-c="all"></b></button>
-    <button class="chipb" data-f="Titanium" aria-pressed="false">Titanium<b data-c="Titanium"></b></button>
-    <button class="chipb" data-f="NOVA 30" aria-pressed="false">NOVA 30<b data-c="NOVA 30"></b></button>
-    <button class="chipb" data-f="Speaker" aria-pressed="false">Speakers<b data-c="Speaker"></b></button>
-    <button class="chipb" data-f="Invitado" aria-pressed="false">Invitados<b data-c="Invitado"></b></button>
-  </div>
+
 
   <div class="grid" id="people"></div>
 </section>
@@ -399,13 +409,15 @@ footer img{height:18px;width:auto}
   <div class="ph">
     <p class="label">Cronograma</p>
     <h1 id="h-cron">Cuatro días, <em>una carrera.</em></h1>
-    <p>La agenda completa, día por día. Lo que está pasando ahora se marca solo. Los días de carrera salimos a las 9:00 del Ángel de la Independencia y regresamos a las 18:00.</p>
+    <p>Elige el día para ver su agenda. Lo que está pasando ahora se marca solo.</p>
   </div>
+
+  <div class="daytabs" id="daytabs" role="tablist" aria-label="Días del encuentro"></div>
 
   <div class="box venue">
     <span class="ic"><svg><use href="#i-pin"/></svg></span>
     <div>
-      <p class="label" id="v-lbl">Dónde es hoy</p>
+      <p class="label" id="v-lbl">Dónde es</p>
       <h2 id="v-name">Público Reforma</h2>
       <p id="v-addr">Av. Paseo de la Reforma 333, piso 7 · CDMX</p>
     </div>
@@ -563,13 +575,7 @@ footer img{height:18px;width:auto}
             <select class="sel" id="f-country"></select>
           </div>
         </div>
-        <div class="field">
-          <label for="f-com">Comunidad</label>
-          <select class="sel" id="f-com">
-            <option value="">Elige una opción</option>
-            <option>Titanium</option><option>NOVA 30</option><option>Speaker</option><option>Invitado</option><option>Equipo Hotmart</option>
-          </select>
-        </div>
+
         <div class="field">
           <label for="f-bio">Bio</label>
           <textarea class="ta" id="f-bio" maxlength="220" placeholder="A qué te dedicas, en una o dos líneas."></textarea>
@@ -780,7 +786,6 @@ const API = {
 /* ===================== ESTADO ===================== */
 let ME = store.get("pd_me", null);     // perfil propio
 let PEOPLE = [];                        // perfiles de asistentes
-let FILTER = "all";
 
 /* ===================== ROUTER ===================== */
 const ROUTES = ["quien","cronograma","evaluacion","material","perfil"];
@@ -818,7 +823,7 @@ function renderStrip(){
 
 /* ===================== QUIÉN ES QUIÉN ===================== */
 function allPeople(){
-  return PEOPLE.map(p => ({ ...p, kind: p.community === "Speaker" ? "speaker" : "att" }))
+  return PEOPLE.map(p => ({ ...p }))
     .sort((a,b) => a.name.localeCompare(b.name, "es"));
 }
 function match(p, q){
@@ -826,17 +831,12 @@ function match(p, q){
   const h = [p.name,p.project,p.country,p.ig,p.bio].join(" ").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
   return h.includes(q);
 }
-function tagFor(p){
-  return p.community === "Speaker" ? `<span class="tag sp">Speaker</span>`
-    : p.community === "Titanium" ? `<span class="tag ti"><img src="https://assets.hotmartcomunidades.com/orbs/badge-titanium.svg" alt="">Titanium</span>`
-    : p.community ? `<span class="tag">${esc(p.community)}</span>` : "";
-}
 function card(p){
-  const ring = p.community === "Titanium" ? "ring ti" : "ring";
+  const ring = "ring";
   return `<article class="person" tabindex="0" role="button" data-id="${esc(p.id)}" aria-label="Ver perfil de ${esc(p.name)}">
     ${avatar(p, ring)}
     <h3>${esc(p.name)}</h3>
-    <div class="meta">${tagFor(p)}${p.country ? `<span>${flag(p.country)} ${esc(p.country)}</span>` : ""}</div>
+    <div class="meta">${p.country ? `<span>${flag(p.country)} ${esc(p.country)}</span>` : ""}</div>
     <p class="bio">${esc(p.bio || p.project || "")}</p>
     <span class="go">Ver perfil <svg width="14" height="14"><use href="#i-arrow"/></svg></span>
   </article>`;
@@ -844,27 +844,21 @@ function card(p){
 function renderPeople(){
   const q = $("#q").value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
   const all = allPeople();
-  const counts = { all: all.length };
-  ["Titanium","NOVA 30","Speaker","Invitado"].forEach(c => counts[c] = all.filter(a => a.community === c).length);
-  $$("[data-c]").forEach(b => b.textContent = counts[b.dataset.c] || "");
-  const list = all.filter(p => (FILTER === "all" || p.community === FILTER) && match(p,q));
+  const list = all.filter(p => match(p,q));
   const hasMe = ME && PEOPLE.some(p => p.id === ME.id);
   let html = "";
   if (!hasMe && !q) html += `<div class="join"><p class="label">${all.length ? "Aún no apareces" : "Sé el primero"}</p><h3>Crea tu perfil y que te encuentren.</h3><p>Toma un minuto: escribe tu Instagram y nosotros traemos tu foto y tu bio.</p><a class="btn" href="#perfil">Crear mi perfil</a></div>`;
   html += list.map(card).join("");
-  if (!list.length && (q || FILTER !== "all")) html += `<div class="empty" style="grid-column:1/-1">${q ? `No encontramos a nadie con “${esc($("#q").value)}”.` : "Todavía no hay perfiles en esta categoría."}</div>`;
+  if (!list.length && q) html += `<div class="empty" style="grid-column:1/-1">No encontramos a nadie con “${esc($("#q").value)}”.</div>`;
   $("#people").innerHTML = html;
 }
 $("#q").addEventListener("input", renderPeople);
-$$(".chipb").forEach(b => b.addEventListener("click", () => {
-  FILTER = b.dataset.f; $$(".chipb").forEach(x => x.setAttribute("aria-pressed", x === b)); renderPeople();
-}));
 $("#people").addEventListener("click", e => { const c = e.target.closest(".person"); if (c) openPerson(c.dataset.id); });
 $("#people").addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("person")){ e.preventDefault(); openPerson(e.target.dataset.id); } });
 
 function openPerson(id){
   const p = allPeople().find(x => x.id === id); if (!p) return;
-  const tags = [tagFor(p), p.country ? `<span class="tag">${flag(p.country)} ${esc(p.country)}</span>` : ""].join("");
+  const tags = p.country ? `<span class="tag">${flag(p.country)} ${esc(p.country)}</span>` : "";
   const slot = null;
   $("#dlgBody").innerHTML = `
     <button class="x" type="button" aria-label="Cerrar" data-close><svg><use href="#i-x"/></svg></button>
@@ -885,33 +879,49 @@ function openPerson(id){
 $("#dlg").addEventListener("click", e => { if (e.target.id === "dlg" || e.target.closest("[data-close]")) $("#dlg").close(); });
 
 /* ===================== CRONOGRAMA ===================== */
+const MONTH_ABBR = { "10":"oct", "11":"nov" };
+const WD = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+let SELDAY = null;
+const VENUES = {
+  content: { lbl:"Dónde es", name:"Público Reforma", addr:"Av. Paseo de la Reforma 333, piso 7 · CDMX",
+    map:"https://www.google.com/maps/search/?api=1&query=P%C3%BAblico+Reforma%2C+Av.+Paseo+de+la+Reforma+333%2C+Ciudad+de+M%C3%A9xico" },
+  race: { lbl:"Punto de salida · 9:00 hrs", name:"Ángel de la Independencia", addr:"Paseo de la Reforma · Regreso a las 18:00 hrs",
+    map:"https://www.google.com/maps/search/?api=1&query=%C3%81ngel+de+la+Independencia%2C+Ciudad+de+M%C3%A9xico" }
+};
 function renderDays(){
   const { day, min } = nowMX();
-  if (day >= "2026-10-30" && day <= "2026-11-01"){
-    $("#v-lbl").textContent = "Punto de salida hoy · 9:00 hrs";
-    $("#v-name").textContent = "Ángel de la Independencia";
-    $("#v-addr").textContent = "Paseo de la Reforma · Regreso a las 18:00 hrs";
-    $("#v-map").href = "https://www.google.com/maps/search/?api=1&query=%C3%81ngel+de+la+Independencia%2C+Ciudad+de+M%C3%A9xico";
-  }
-  const openKey = DAYS.some(d => d.key === day) ? day : (day < DAYS[0].key ? DAYS[0].key : null);
-  $("#days").innerHTML = DAYS.map(d => {
-    const isToday = d.key === day, isPast = d.key < day;
-    const rows = d.slots.map(s => {
-      const now = isToday && min >= toMin(s.s) && min < toMin(s.e);
-      const past = isPast || (isToday && min >= toMin(s.e));
-      const S = s.sp ? sp(s.sp) : null;
-      const what = S
-        ? `<div class="who">${avatar({ name:S.n, photo:`https://digital.hotmartcomunidades.com/img/speakers/${S.id}.jpg` })}<div>${now ? `<span class="live"><i></i>En el escenario</span>` : ""}<b>${esc(s.t || S.n)}</b><span>${esc(s.d || (S.tema || S.rol))}</span></div></div>`
-        : `<div>${now ? `<span class="live"><i></i>Ahora</span>` : ""}<b>${esc(s.t)}</b>${s.d ? `<span>${s.link ? `<a href="${s.link}" style="color:var(--orange);font-weight:700;text-decoration:none">${esc(s.d)}</a>` : esc(s.d)}</span>` : ""}</div>`;
-      const showEnd = !s.track || s.go;
-      return `<li class="slot${now ? " now" : ""}${past ? " past" : ""}${s.hl ? " hl" : ""}${s.go ? " go" : ""}"><span class="h">${fmt12(s.s)}${showEnd && !s.track ? `<small>a ${fmt12(s.e)} hrs</small>` : `<small>hrs</small>`}</span>${what}</li>`;
-    }).join("");
-    return `<details class="day" ${d.key === openKey ? "open" : ""}>
-      <summary><span class="ttl"><h3>${d.n} · ${esc(d.title)}</h3><span class="d">${esc(d.date)}</span>${isToday ? `<span class="today">Hoy</span>` : ""}</span><svg class="chev"><use href="#i-chev"/></svg></summary>
-      <div class="body"><p class="where"><svg><use href="#i-pin"/></svg>${esc(d.where)}</p><ol class="slots">${rows}</ol></div>
-    </details>`;
+  if (!SELDAY) SELDAY = DAYS.some(d => d.key === day) ? day : (day > DAYS[DAYS.length-1].key ? DAYS[DAYS.length-1].key : DAYS[0].key);
+  const d = DAYS.find(x => x.key === SELDAY);
+
+  $("#daytabs").innerHTML = DAYS.map(x => {
+    const [y,m,dd] = x.key.split("-"); const wd = WD[new Date(+y, +m-1, +dd).getDay()];
+    const on = x.key === SELDAY, today = x.key === day;
+    return `<button type="button" role="tab" class="dtab${on ? " on" : ""}${x.key < day ? " done" : ""}" aria-selected="${on}" data-k="${x.key}">
+      <span class="wd">${wd}${today ? ` <i class="tdot">Hoy</i>` : ""}</span>
+      <span class="num">${+dd}</span>
+      <span class="mo">${MONTH_ABBR[m]}</span>
+      <span class="tt">${esc(x.title)}</span>
+    </button>`;
   }).join("");
+
+  const v = VENUES[d.race ? "race" : "content"];
+  $("#v-lbl").textContent = v.lbl; $("#v-name").textContent = v.name; $("#v-addr").textContent = v.addr; $("#v-map").href = v.map;
+
+  const isToday = d.key === day, isPast = d.key < day;
+  const rows = d.slots.map(s => {
+    const now = isToday && min >= toMin(s.s) && min < toMin(s.e);
+    const past = isPast || (isToday && min >= toMin(s.e));
+    const S = s.sp ? sp(s.sp) : null;
+    const what = S
+      ? `<div class="who">${avatar({ name:S.n, photo:`https://digital.hotmartcomunidades.com/img/speakers/${S.id}.jpg` })}<div>${now ? `<span class="live"><i></i>En el escenario</span>` : ""}<b>${esc(s.t || S.n)}</b><span>${esc(s.d || (S.tema || S.rol))}</span></div></div>`
+      : `<div>${now ? `<span class="live"><i></i>Ahora</span>` : ""}<b>${esc(s.t)}</b>${s.d ? `<span>${s.link ? `<a href="${s.link}" style="color:var(--orange);font-weight:700;text-decoration:none">${esc(s.d)}</a>` : esc(s.d)}</span>` : ""}</div>`;
+    return `<li class="slot${now ? " now" : ""}${past ? " past" : ""}${s.hl ? " hl" : ""}${s.go ? " go" : ""}"><span class="h">${fmt12(s.s)}${!s.track ? `<small>a ${fmt12(s.e)} hrs</small>` : `<small>hrs</small>`}</span>${what}</li>`;
+  }).join("");
+  $("#days").innerHTML = `<div class="dayhead"><h3>${d.n} · ${esc(d.title)}</h3><span class="d">${esc(d.date)}</span>${isToday ? `<span class="today">Hoy</span>` : ""}</div>
+    <p class="where"><svg><use href="#i-pin"/></svg>${esc(d.where)}</p><ol class="slots">${rows}</ol>`;
+  $("#llevar").hidden = !d.race;
 }
+$("#daytabs").addEventListener("click", e => { const b = e.target.closest(".dtab"); if (!b) return; SELDAY = b.dataset.k; renderDays(); });
 
 /* ===================== EVALUACIÓN ===================== */
 let NPS = null; const RATES = {};
@@ -972,13 +982,13 @@ $("#f-country").innerHTML = `<option value="">Elige tu país</option>` + COUNTRI
 
 function fillForm(){
   $("#f-ig").value = DRAFT.ig || ""; $("#f-name").value = DRAFT.name || ""; $("#f-proj").value = DRAFT.project || "";
-  $("#f-country").value = DRAFT.country || ""; $("#f-com").value = DRAFT.community || ""; $("#f-bio").value = DRAFT.bio || "";
+  $("#f-country").value = DRAFT.country || ""; $("#f-bio").value = DRAFT.bio || "";
   $("#f-help").value = DRAFT.help || ""; $("#f-mail").value = DRAFT.email || ""; syncDraft();
 }
 function syncDraft(){
   DRAFT.ig = $("#f-ig").value.trim().replace(/^@/,"").replace(/^https?:\/\/(www\.)?instagram\.com\//i,"").replace(/[/?#].*$/,"");
   DRAFT.name = $("#f-name").value.trim(); DRAFT.project = $("#f-proj").value.trim();
-  DRAFT.country = $("#f-country").value; DRAFT.community = $("#f-com").value;
+  DRAFT.country = $("#f-country").value; 
   DRAFT.bio = $("#f-bio").value.trim(); DRAFT.help = $("#f-help").value.trim(); DRAFT.email = $("#f-mail").value.trim().toLowerCase();
   $("#f-av").innerHTML = DRAFT.photo ? `<img src="${esc(DRAFT.photo)}" alt="">` : esc(initials(DRAFT.name || "Tú"));
   $("#f-rm").hidden = !DRAFT.photo;
