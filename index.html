@@ -909,7 +909,16 @@ $("#igBtn").addEventListener("click", async () => {
     note.className = "note ok"; note.textContent = "Listo, trajimos tu foto, nombre y bio. Revisa y ajusta lo que quieras."; note.hidden = false;
   } else {
     const img = new Image();
-    img.onload = () => { DRAFT.photo = r.photo; syncDraft(); };
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      // La convertimos aquí: el servicio de respaldo no deja descargarla desde el servidor
+      try{
+        const S = 480, c = document.createElement("canvas"), k = Math.min(img.width, img.height);
+        c.width = c.height = S; c.getContext("2d").drawImage(img, (img.width-k)/2, (img.height-k)/2, k, k, 0, 0, S, S);
+        DRAFT.photo = c.toDataURL("image/jpeg", .85);
+      }catch(e){ DRAFT.photo = r.photo; }
+      syncDraft();
+    };
     img.onerror = () => { note.className = "note warn"; note.textContent = "No pudimos leer esa cuenta (puede ser personal o privada). Sube tu foto y llena tu bio a mano."; };
     img.src = r.photo;
     note.className = "note"; note.textContent = "Trajimos tu foto. Tu bio no está disponible para tu tipo de cuenta, así que escríbela abajo."; note.hidden = false;

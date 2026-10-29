@@ -49,7 +49,9 @@ export default async function handler(req, res) {
     };
     const old = await listAll(`profiles/${id}/`);
     await putJSON(`profiles/${id}/p.json`, profile);
-    if (old.length) await del(old.map(b => b.url)).catch(() => {});
+    const oldPhotos = (await listAll(`photos/${id}`)).filter(b => b.url !== photo);
+    const stale = [...old, ...oldPhotos].map(b => b.url);
+    if (stale.length) await del(stale).catch(() => {});
     const { email: _e, ...pub } = profile;
     return res.status(200).json({ ok: true, profile: pub });
   } catch (e) {
