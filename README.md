@@ -11,10 +11,10 @@ Producción: https://agenda.hotmartcomunidades.com · Vercel: proyecto `agenda` 
 - **App:** `manifest.webmanifest` + `icons/` para guardarla en la pantalla de inicio.
 
 ## Backend (carpeta `api/`, Vercel Blob)
-- `GET /api/profiles` · perfiles públicos (sin correo).
-- `POST /api/profile` · crea o actualiza un perfil (la llave es el correo). Copia la foto al Blob.
+- `GET /api/profiles` · perfiles públicos.
+- `POST /api/login` · entra con el @ de Instagram: regresa el perfil o lo crea con los datos públicos de Instagram.
+- `POST /api/profile` · actualiza un perfil (la llave es el @ de Instagram). Copia la foto al Blob.
 - `POST /api/eval` · guarda una evaluación (NPS, ponencias, comentarios).
-- `GET /api/me?email=` · recupera tu propio perfil (pantalla de bienvenida → "Ya tengo perfil").
 - `GET /api/instagram?u=usuario` · Business Discovery de Meta. Requiere `IG_USER_ID` e `IG_TOKEN` en Vercel.
 - `GET /api/export?key=EXPORT_KEY&t=profiles|evals` · descarga CSV (agrega `&f=json` para JSON).
 - `GET /api/admin?key=EXPORT_KEY&profile=<id>` o `&eval=<file>` · borra un perfil o una evaluación.

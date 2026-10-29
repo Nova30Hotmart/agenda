@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const ev = {
     nps, ...ratings,
     take: clean(d.take, 500), improve: clean(d.improve, 500),
-    name: clean(d.name, 80), email: clean(d.email, 254).toLowerCase(),
+    name: clean(d.name, 80), ig: clean(d.ig, 40),
     ts: new Date().toISOString()
   };
   try {

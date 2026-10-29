@@ -4,8 +4,8 @@ export default async function handler(req, res) {
   if (req.method !== "GET") return res.status(405).json({ error: "Método no permitido." });
   try {
     const { latest } = await latestByFolder("profiles/");
-    const all = (await Promise.all(latest.map(b => getJSON(b.url)))).filter(Boolean);
-    const profiles = all.map(({ email, ...pub }) => pub);
+    const profiles = (await Promise.all(latest.map(b => getJSON(b.url)))).filter(Boolean)
+      .map(({ email, ...pub }) => pub);
     res.setHeader("Cache-Control", "no-store");
     return res.status(200).json({ profiles });
   } catch (e) {

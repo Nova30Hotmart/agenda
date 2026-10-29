@@ -377,6 +377,15 @@ body.r-perfil .fab,body.r-evaluacion .fab{display:none}
 .w-alt{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:18px}
 .w-link{background:none;border:0;padding:6px 0;color:var(--fg);font-weight:700;font-size:14px;text-decoration:underline;text-decoration-color:rgba(255,255,255,.3);text-underline-offset:4px}
 .w-skip{align-self:flex-start;background:none;border:0;padding:8px 0;color:var(--faint);font-size:13px}
+.w-hint{font-size:13.5px;color:#f5d5c8;margin:2px 0 8px}
+.w-form #w-namebox{display:grid;gap:8px}
+.w-form #w-namebox[hidden]{display:none}
+.acct-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center}
+.acct-row .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(255,64,0,.1);border:1px solid rgba(255,64,0,.35);color:var(--orange)}
+.acct-row .ic svg{width:22px;height:22px}
+.acct-row b{display:block;font-family:var(--font-display);font-weight:400;font-size:21px;margin-top:2px}
+@media (max-width:620px){.acct-row{grid-template-columns:auto minmax(0,1fr)}.acct-row .btn-line{grid-column:1/-1}}
+.w-link.out{margin-top:10px;color:var(--faint);font-weight:600;font-size:13px}
 .onb{display:flex;gap:14px;align-items:center;padding:16px 18px;margin-bottom:16px;border-radius:14px;border:1px solid rgba(255,64,0,.45);background:radial-gradient(120% 140% at 0% 0%,rgba(255,64,0,.16),var(--card) 60%);font-size:14.5px;color:var(--dim)}
 .onb[hidden]{display:none}
 .onb b{color:var(--fg)}
@@ -451,37 +460,22 @@ footer img{height:18px;width:auto}
       <span class="sep" aria-hidden="true"></span>
       <b>Titanium</b><i>×</i><img class="nv" src="https://assets.hotmartcomunidades.com/logos/nova30-white.png" alt="NOVA 30">
     </div>
-
-    <div class="w-step" id="w-1">
+    <div class="w-step">
       <p class="label">Paddock · CDMX · 29 oct – 1 nov</p>
       <h1 id="w-title">Bienvenido <em>al paddock.</em></h1>
-      <p class="w-sub">Antes de arrancar, toma tu lugar en la parrilla para que los demás sepan quién eres y en qué te pueden ayudar. Toma un minuto.</p>
+      <p class="w-sub">Escribe el @ de tu Instagram y entra. Sin contraseña, sin registro.</p>
       <form id="w-form" class="w-form" novalidate>
-        <label for="w-ig" class="w-lbl">Tu usuario de Instagram</label>
-        <div class="pre"><span>@</span><input class="in" id="w-ig" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="tuusuario"></div>
-        <button class="btn lg" type="submit" id="w-go">Traer mi perfil</button>
+        <label for="w-ig" class="sr">Tu usuario de Instagram</label>
+        <div class="pre"><span>@</span><input class="in" id="w-ig" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="tuusuario"></div>
+        <div id="w-namebox" hidden>
+          <p class="w-hint">No pudimos leer tu Instagram (puede ser una cuenta personal o privada). Escribe tu nombre para entrar.</p>
+          <label for="w-name" class="sr">Tu nombre</label>
+          <input class="in" id="w-name" type="text" autocomplete="name" maxlength="80" placeholder="Tu nombre">
+        </div>
+        <button class="btn lg" type="submit" id="w-go">Entrar</button>
         <p class="note warn" id="w-err" hidden></p>
       </form>
-      <div class="w-alt">
-        <button type="button" class="w-link" id="w-manual">No tengo Instagram, lo lleno a mano</button>
-        <button type="button" class="w-link" id="w-have">Ya tengo perfil</button>
-      </div>
     </div>
-
-    <div class="w-step" id="w-2" hidden>
-      <p class="label">Recupera tu perfil</p>
-      <h1>Qué bueno <em>verte de nuevo.</em></h1>
-      <p class="w-sub">Escribe el correo con el que creaste tu perfil.</p>
-      <form id="w-form2" class="w-form" novalidate>
-        <label for="w-mail" class="w-lbl">Correo</label>
-        <input class="in" id="w-mail" type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com">
-        <button class="btn lg" type="submit" id="w-go2">Entrar</button>
-        <p class="note warn" id="w-err2" hidden></p>
-      </form>
-      <div class="w-alt"><button type="button" class="w-link" id="w-back">← Crear un perfil nuevo</button></div>
-    </div>
-
-    <button type="button" class="w-skip" id="w-skip">Solo quiero ver la agenda</button>
   </div>
 </div>
 
@@ -637,27 +631,20 @@ footer img{height:18px;width:auto}
   <div class="ph">
     <p class="label">Mi perfil</p>
     <h1 id="h-perfil">Así te ven <em>los demás.</em></h1>
-    <p>Tu perfil aparece en la parrilla. Escribe tu Instagram y presiona “Traer de Instagram” para llenarlo en un segundo.</p>
+    <p>Tu perfil aparece en la parrilla. Agrega tu desafío y en qué puedes ayudar para que otros te encuentren.</p>
   </div>
 
-  <div class="onb" id="onb" hidden>
-    <span class="n">✓</span>
-    <div><b>Casi listo.</b> Revisa tus datos, cuéntanos tu desafío, agrega tu correo y presiona “Guardar y tomar mi lugar” para entrar.</div>
-  </div>
   <div class="prof-grid">
     <form id="profForm" novalidate>
-      <div class="box">
-        <h2>Tu Instagram</h2>
-        <p class="muted">Traemos tu foto, tu nombre y tu bio. Después puedes editar lo que quieras.</p>
-        <div class="field">
-          <label for="f-ig">Usuario de Instagram</label>
-          <div class="ig">
-            <div class="pre"><span>@</span><input class="in" id="f-ig" type="text" inputmode="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="tuusuario"></div>
-            <button class="btn-line" type="button" id="igBtn"><svg><use href="#i-ig"/></svg><span>Traer de Instagram</span></button>
-          </div>
-          <small>Solo el @, sin el enlace.</small>
-          <p class="note" id="igNote" hidden></p>
+      <div class="box acct">
+        <div class="acct-row">
+          <span class="ic"><svg><use href="#i-ig"/></svg></span>
+          <div><p class="label">Entraste como</p><b id="acct-ig">@tuusuario</b></div>
+          <button class="btn-line" type="button" id="igBtn"><svg><use href="#i-ig"/></svg><span>Actualizar desde Instagram</span></button>
         </div>
+        <p class="note" id="igNote" hidden></p>
+        <input type="hidden" id="f-ig">
+        <button type="button" class="w-link out" id="logout">¿No eres tú? Salir</button>
       </div>
 
       <div class="box">
@@ -709,17 +696,8 @@ footer img{height:18px;width:auto}
         </div>
       </div>
 
-      <div class="box">
-        <h2>Tu correo</h2>
-        <p class="muted">No se muestra en tu perfil. Lo usamos para que puedas editarlo desde otro dispositivo.</p>
-        <div class="field">
-          <label for="f-mail">Correo</label>
-          <input class="in" id="f-mail" type="email" autocomplete="email" inputmode="email" required>
-        </div>
-      </div>
-
       <p class="note warn" id="profErr" hidden></p>
-      <div class="savebar"><button class="btn lg" type="submit" id="saveBtn">Guardar y tomar mi lugar</button></div>
+      <div class="savebar"><button class="btn lg" type="submit" id="saveBtn">Guardar cambios</button></div>
     </form>
 
     <aside>
@@ -880,9 +858,22 @@ const API = {
     if (!r.ok) throw new Error("profiles");
     return (await r.json()).profiles || [];
   },
+  async login(ig, name){
+    if (!CONFIG.API_URL){
+      const all = store.get("pd_profiles", []); let p = all.find(x => x.ig === ig);
+      if (p) return { profile:p };
+      if (!name) return { needName:true };
+      p = { id:"l"+Date.now().toString(36), ig, name, bio:"", photo:"" }; all.push(p); store.set("pd_profiles", all);
+      return { profile:p, created:true };
+    }
+    const r = await fetch(CONFIG.API_URL + "/login", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ ig, name }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || "No pudimos entrar. Intenta de nuevo.");
+    return j;
+  },
   async saveProfile(p){
     if (!CONFIG.API_URL){
-      const all = store.get("pd_profiles", []).filter(x => x.email !== p.email);
+      const all = store.get("pd_profiles", []).filter(x => x.ig !== p.ig);
       all.push(p); store.set("pd_profiles", all); return { ok:true, profile:p };
     }
     const r = await fetch(CONFIG.API_URL + "/profile", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(p) });
@@ -899,10 +890,9 @@ const API = {
   async instagram(user){
     try{
       const r = await fetch(`${CONFIG.IG_URL}?u=${encodeURIComponent(user)}`);
-      if (r.ok){ const j = await r.json(); if (j && (j.name || j.photo)) return { ...j, source:"api" }; }
+      if (r.ok){ const j = await r.json(); if (j && (j.name || j.photo)) return j; }
     }catch(e){}
-    // Respaldo: solo la foto
-    return { photo:`https://unavatar.io/instagram/${encodeURIComponent(user)}?fallback=false`, source:"photo" };
+    return null;
   }
 };
 
@@ -920,6 +910,7 @@ function route(){
   $$("[data-r]").forEach(a => a.setAttribute("aria-current", a.dataset.r === r ? "page" : "false"));
   if (r === "cronograma") renderDays();
   if (r === "evaluacion") focusRate();
+  if (r === "perfil" && !ME) W.open();
   window.scrollTo({ top:0, behavior:"instant" in window ? "instant" : "auto" });
 }
 addEventListener("hashchange", route);
@@ -984,7 +975,11 @@ function renderPeople(){
   const list = all.filter(p => match(p,q));
   const hasMe = ME && PEOPLE.some(p => p.id === ME.id);
   let html = "";
-  $("#join").innerHTML = (!hasMe && !q) ? `<div class="join"><div><p class="label">${all.length ? "Aún no estás en la parrilla" : "La parrilla está vacía"}</p><h3>${all.length ? "Toma tu lugar en la parrilla." : "Sé el primero en tomar su lugar."}</h3><p>Toma un minuto: escribe tu Instagram y nosotros traemos tu foto y tu bio.</p></div><a class="btn" href="#perfil">Toma tu lugar</a></div>` : "";
+  $("#join").innerHTML = q ? "" : !ME
+    ? `<div class="join"><div><p class="label">Aún no estás en la parrilla</p><h3>Toma tu lugar en la parrilla.</h3><p>Solo escribe el @ de tu Instagram.</p></div><a class="btn" href="#" data-enter>Entrar</a></div>`
+    : !ME.challenge
+    ? `<div class="join"><div><p class="label">Ya estás en la parrilla</p><h3>Cuéntanos tu desafío.</h3><p>Así los demás saben en qué te pueden ayudar. Toma 30 segundos.</p></div><a class="btn" href="#perfil">Agregar mi desafío</a></div>`
+    : "";
   html += list.map(card).join("");
   if (!list.length && q) html += `<div class="empty" style="grid-column:1/-1">No encontramos a nadie con “${esc($("#q").value)}”.</div>`;
   $("#people").innerHTML = html;
@@ -1106,7 +1101,7 @@ $("#evalForm").addEventListener("submit", async e => {
   err.hidden = true;
   const btn = $("#evalBtn"); btn.disabled = true; btn.innerHTML = `<span class="spin"></span>`;
   try{
-    await API.saveEval({ nps:NPS, ratings:RATES, take:$("#e-best").value.trim(), improve:$("#e-better").value.trim(), email: ME?.email || "", name: ME?.name || "" });
+    await API.saveEval({ nps:NPS, ratings:RATES, take:$("#e-best").value.trim(), improve:$("#e-better").value.trim(), ig: ME?.ig || "", name: ME?.name || "" });
     store.set("pd_eval_done", true); showEvalDone();
   }catch(x){ btn.disabled = false; btn.textContent = "Enviar evaluación"; err.textContent = "No pudimos enviar tu evaluación. Intenta de nuevo."; err.hidden = false; }
 });
@@ -1134,13 +1129,12 @@ $("#f-country").innerHTML = `<option value="">Elige tu país</option>` + COUNTRI
 function fillForm(){
   $("#f-ig").value = DRAFT.ig || ""; $("#f-name").value = DRAFT.name || ""; $("#f-proj").value = DRAFT.project || "";
   $("#f-country").value = DRAFT.country || ""; $("#f-bio").value = DRAFT.bio || "";
-  $("#f-help").value = DRAFT.help || ""; $("#f-chal").value = DRAFT.challenge || ""; $("#f-mail").value = DRAFT.email || ""; syncDraft();
+  $("#f-help").value = DRAFT.help || ""; $("#f-chal").value = DRAFT.challenge || ""; $("#acct-ig").textContent = DRAFT.ig ? "@" + DRAFT.ig : ""; syncDraft();
 }
 function syncDraft(){
-  DRAFT.ig = $("#f-ig").value.trim().replace(/^@/,"").replace(/^https?:\/\/(www\.)?instagram\.com\//i,"").replace(/[/?#].*$/,"");
   DRAFT.name = $("#f-name").value.trim(); DRAFT.project = $("#f-proj").value.trim();
   DRAFT.country = $("#f-country").value; 
-  DRAFT.bio = $("#f-bio").value.trim(); DRAFT.help = $("#f-help").value.trim(); DRAFT.challenge = $("#f-chal").value.trim(); DRAFT.email = $("#f-mail").value.trim().toLowerCase();
+  DRAFT.bio = $("#f-bio").value.trim(); DRAFT.help = $("#f-help").value.trim(); DRAFT.challenge = $("#f-chal").value.trim();
   $("#f-av").innerHTML = DRAFT.photo ? `<img src="${esc(DRAFT.photo)}" alt="">` : esc(initials(DRAFT.name || "Tú"));
   $("#f-rm").hidden = !DRAFT.photo;
   $$(".count").forEach(c => { const el = document.getElementById(c.dataset.for); c.textContent = `${el.value.length}/${el.maxLength}`; });
@@ -1152,32 +1146,18 @@ $("#profForm").addEventListener("change", syncDraft);
 $("#igBtn").addEventListener("click", async () => {
   syncDraft();
   const note = $("#igNote"), btn = $("#igBtn");
-  if (!DRAFT.ig){ note.className = "note warn"; note.textContent = "Escribe tu usuario de Instagram primero."; note.hidden = false; $("#f-ig").focus(); return; }
   btn.disabled = true; btn.querySelector("span").textContent = "Buscando…";
-  const r = await API.instagram(DRAFT.ig);
-  btn.disabled = false; btn.querySelector("span").textContent = "Traer de Instagram";
-  if (r.source === "api"){
+  const r = DRAFT.ig ? await API.instagram(DRAFT.ig) : null;
+  btn.disabled = false; btn.querySelector("span").textContent = "Actualizar desde Instagram";
+  if (r){
     if (r.photo) DRAFT.photo = r.photo;
-    if (r.name && !$("#f-name").value) $("#f-name").value = r.name;
-    if (r.bio && !$("#f-bio").value) $("#f-bio").value = r.bio.slice(0, 220);
-    note.className = "note ok"; note.textContent = "Listo, trajimos tu foto, nombre y bio. Revisa y ajusta lo que quieras."; note.hidden = false;
+    if (r.name) $("#f-name").value = r.name;
+    if (r.bio) $("#f-bio").value = r.bio.slice(0, 220);
+    note.className = "note ok"; note.textContent = "Listo, trajimos tu foto, nombre y bio actuales. Presiona “Guardar cambios” para aplicarlos.";
   } else {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => {
-      // La convertimos aquí: el servicio de respaldo no deja descargarla desde el servidor
-      try{
-        const S = 480, c = document.createElement("canvas"), k = Math.min(img.width, img.height);
-        c.width = c.height = S; c.getContext("2d").drawImage(img, (img.width-k)/2, (img.height-k)/2, k, k, 0, 0, S, S);
-        DRAFT.photo = c.toDataURL("image/jpeg", .85);
-      }catch(e){ DRAFT.photo = r.photo; }
-      syncDraft();
-    };
-    img.onerror = () => { note.className = "note warn"; note.textContent = "No pudimos leer esa cuenta (puede ser personal o privada). Sube tu foto y llena tu bio a mano."; };
-    img.src = r.photo;
-    note.className = "note"; note.textContent = "Trajimos tu foto. Tu bio no está disponible para tu tipo de cuenta, así que escríbela abajo."; note.hidden = false;
+    note.className = "note warn"; note.textContent = "No pudimos leer tu Instagram (puede ser una cuenta personal o privada). Sube tu foto y escribe tu bio aquí.";
   }
-  syncDraft();
+  note.hidden = false; syncDraft();
 });
 
 $("#f-file").addEventListener("change", e => {
@@ -1197,16 +1177,15 @@ $("#profForm").addEventListener("submit", async e => {
   e.preventDefault(); syncDraft();
   const err = $("#profErr");
   if (!DRAFT.name){ err.textContent = "Escribe tu nombre."; err.hidden = false; $("#f-name").focus(); return; }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(DRAFT.email)){ err.textContent = "Escribe un correo válido para poder editar tu perfil después."; err.hidden = false; $("#f-mail").focus(); return; }
+  if (!ME){ W.open(); return; }
   err.hidden = true;
   const btn = $("#saveBtn"); btn.disabled = true; btn.innerHTML = `<span class="spin"></span>`;
-  const p = { ...DRAFT, id: DRAFT.id || "u" + Date.now().toString(36), updated:new Date().toISOString() };
+  const p = { ...DRAFT, ig: ME.ig, id: ME.id };
   try{
     const r = await API.saveProfile(p);
-    ME = { ...p, ...(r.profile || {}), email: p.email }; DRAFT = { ...ME }; store.set("pd_me", ME);
+    ME = { ...p, ...(r.profile || {}) }; DRAFT = { ...ME }; store.set("pd_me", ME);
     PEOPLE = await API.profiles(); renderMe(); renderPeople();
-    toast("Listo. Ya estás en la parrilla.");
-    $("#onb").hidden = true;
+    toast("Perfil actualizado.");
     setTimeout(() => location.hash = "#quien", 700);
   }catch(x){ err.textContent = (x && x.message && x.message !== "save") ? x.message : "No pudimos guardar tu perfil. Intenta de nuevo."; err.hidden = false; }
   btn.disabled = false; btn.textContent = "Guardar cambios";
@@ -1215,60 +1194,49 @@ $("#profForm").addEventListener("submit", async e => {
 function renderMe(){
   const b = $("#meBtn");
   if (ME){ b.classList.remove("new"); b.innerHTML = `${avatar(ME)}<span>${esc(ME.name.split(" ")[0])}</span>`; $("#saveBtn").textContent = "Guardar cambios"; }
-  else { b.classList.add("new"); b.innerHTML = `<span>Toma tu lugar</span>`; }
+  else { b.classList.add("new"); b.innerHTML = `<span>Entrar</span>`; }
 }
 
 /* ===================== INICIO ===================== */
 /* ===================== BIENVENIDA ===================== */
 const W = {
   open(){ $("#welcome").hidden = false; document.body.classList.add("w-open"); setTimeout(() => $("#w-ig").focus({ preventScroll:true }), 200); },
-  close(){ $("#welcome").hidden = true; document.body.classList.remove("w-open"); },
-  step(n){ $("#w-1").hidden = n !== 1; $("#w-2").hidden = n !== 2; }
+  close(){ $("#welcome").hidden = true; document.body.classList.remove("w-open"); }
 };
-function startOnboarding(ig){
-  W.close(); $("#onb").hidden = false;
-  if (ig){ $("#f-ig").value = ig; }
-  location.hash = "#perfil";
-  setTimeout(() => { if (ig) $("#igBtn").click(); else $("#f-name").focus(); }, 250);
-}
-$("#w-form").addEventListener("submit", e => {
+const normIg = v => String(v || "").trim().replace(/^@/,"").replace(/^https?:\/\/(www\.)?instagram\.com\//i,"").replace(/[/?#].*$/,"").replace(/[^a-zA-Z0-9._]/g,"").toLowerCase();
+$("#w-ig").addEventListener("input", () => { $("#w-namebox").hidden = true; $("#w-err").hidden = true; });
+$("#w-form").addEventListener("submit", async e => {
   e.preventDefault();
-  const ig = $("#w-ig").value.trim().replace(/^@/,"").replace(/^https?:\/\/(www\.)?instagram\.com\//i,"").replace(/[/?#].*$/,"");
-  if (!ig){ const er = $("#w-err"); er.textContent = "Escribe tu usuario de Instagram o elige llenarlo a mano."; er.hidden = false; $("#w-ig").focus(); return; }
-  startOnboarding(ig);
-});
-$("#w-manual").addEventListener("click", () => startOnboarding(""));
-$("#w-have").addEventListener("click", () => { W.step(2); setTimeout(() => $("#w-mail").focus(), 50); });
-$("#w-back").addEventListener("click", () => W.step(1));
-$("#w-skip").addEventListener("click", () => { store.set("pd_skip", Date.now()); W.close(); });
-$("#w-form2").addEventListener("submit", async e => {
-  e.preventDefault();
-  const email = $("#w-mail").value.trim().toLowerCase(), er = $("#w-err2"), btn = $("#w-go2");
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ er.textContent = "Escribe un correo válido."; er.hidden = false; return; }
-  btn.disabled = true; btn.innerHTML = `<span class="spin"></span>`;
+  const ig = normIg($("#w-ig").value), er = $("#w-err"), btn = $("#w-go");
+  const needName = !$("#w-namebox").hidden, name = $("#w-name").value.trim();
+  if (ig.length < 2){ er.textContent = "Escribe tu usuario de Instagram."; er.hidden = false; $("#w-ig").focus(); return; }
+  if (needName && !name){ er.textContent = "Escribe tu nombre para entrar."; er.hidden = false; $("#w-name").focus(); return; }
+  er.hidden = true; btn.disabled = true; btn.innerHTML = `<span class="spin"></span>`;
   try{
-    let prof = null;
-    if (CONFIG.API_URL){
-      const r = await fetch(`${CONFIG.API_URL}/me?email=${encodeURIComponent(email)}`, { cache:"no-store" });
-      const j = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(j.error || "No encontramos un perfil con ese correo.");
-      prof = j.profile;
-    } else {
-      prof = store.get("pd_profiles", []).find(p => p.email === email);
-      if (!prof) throw new Error("No encontramos un perfil con ese correo.");
+    const r = await API.login(ig, needName ? name : "");
+    if (r.needName){ $("#w-namebox").hidden = false; setTimeout(() => $("#w-name").focus(), 50); }
+    else {
+      ME = r.profile; DRAFT = { ...ME }; store.set("pd_me", ME);
+      try{ PEOPLE = await API.profiles(); }catch(x){}
+      renderMe(); fillForm(); renderPeople(); W.close(); location.hash = "#quien";
+      toast(r.created ? `Bienvenido, ${ME.name.split(" ")[0]}. Ya estás en la parrilla.` : `Hola de nuevo, ${ME.name.split(" ")[0]}.`);
     }
-    ME = { ...prof, email }; DRAFT = { ...ME }; store.set("pd_me", ME);
-    renderMe(); fillForm(); renderPeople(); W.close(); location.hash = "#quien";
-    toast(`Hola de nuevo, ${ME.name.split(" ")[0]}.`);
   }catch(x){ er.textContent = x.message; er.hidden = false; }
   btn.disabled = false; btn.textContent = "Entrar";
 });
+$("#logout").addEventListener("click", () => {
+  ME = null; DRAFT = {}; try{ localStorage.removeItem("pd_me"); }catch(e){}
+  $("#w-ig").value = ""; $("#w-name").value = ""; $("#w-namebox").hidden = true;
+  renderMe(); fillForm(); renderPeople(); location.hash = "#quien"; W.open();
+});
+$("#meBtn").addEventListener("click", e => { if (!ME){ e.preventDefault(); W.open(); } });
+$("#people").addEventListener("click", e => { if (e.target.closest("[data-enter]")){ e.preventDefault(); W.open(); } });
+$("#join").addEventListener("click", e => { if (e.target.closest("[data-enter]")){ e.preventDefault(); W.open(); } });
 
 (async function init(){
   try{ PEOPLE = await API.profiles(); }catch(e){ PEOPLE = []; }
   renderMe(); fillForm(); renderPeople(); renderMaterial(); renderStrip(); route();
-  const skippedRecently = Date.now() - (store.get("pd_skip", 0) || 0) < 6 * 3600 * 1000;
-  if (!ME && !skippedRecently && new URLSearchParams(location.search).get("welcome") !== "0") W.open();
+  if (!ME && new URLSearchParams(location.search).get("welcome") !== "0") W.open();
   if (store.get("pd_eval_done", false)) showEvalDone(); else { loadDraft(); renderStrip(); }
   setInterval(() => { renderStrip(); if (location.hash === "#cronograma") renderDays(); }, 60000);
 })();
