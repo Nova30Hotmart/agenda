@@ -172,12 +172,16 @@ main{min-height:70vh}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
 .person{position:relative;display:grid;justify-items:center;text-align:center;gap:10px;padding:26px 20px 20px;background:var(--card);border:1px solid var(--line);border-radius:16px;cursor:pointer;transition:border-color .25s,transform .25s,background .25s;overflow:hidden}
-.grid.parrilla{grid-template-columns:repeat(4,minmax(0,1fr));column-gap:18px;row-gap:20px;padding-bottom:56px}
-.grid.parrilla .person:nth-child(4n+2),.grid.parrilla .person:nth-child(4n+4){top:56px}
-@media (max-width:1000px){.grid.parrilla{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.parrilla .person:nth-child(4n+2),.grid.parrilla .person:nth-child(4n+4){top:0}.grid.parrilla .person:nth-child(even){top:44px}}
+.grid.parrilla{grid-template-columns:repeat(4,minmax(0,1fr));column-gap:16px;row-gap:16px;align-items:stretch}
+@media (max-width:1000px){.grid.parrilla{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.grid.parrilla{column-gap:10px;row-gap:12px}.grid.parrilla .person{padding:22px 12px 16px}.grid.parrilla .person .av{width:72px;height:72px;font-size:24px}.grid.parrilla .person h3{font-size:16px}.grid.parrilla .person p.bio{font-size:12.5px}}
 .grid.parrilla .person::before{content:"";position:absolute;top:10px;left:16px;right:16px;height:12px;border:2px solid rgba(255,255,255,.14);border-bottom:0;pointer-events:none}
-.grid.parrilla .person{top:0}
+.grid.parrilla .person{top:0;display:flex;flex-direction:column;align-items:center;height:100%}
+.grid.parrilla .person .meta{min-height:20px}
+.grid.parrilla .person p.bio{min-height:2.9em;width:100%}
+.grid.parrilla .person .chal{margin-top:auto;min-height:4.6em}
+.grid.parrilla .person .chal.empty{visibility:hidden}
+.grid.parrilla .person .go{margin-top:12px}
 .person:hover,.person:focus-visible{border-color:rgba(255,64,0,.45);transform:translateY(-2px);outline:none}
 .person .av{width:96px;height:96px;font-size:30px}
 .person h3{font-family:var(--font-display);font-size:19px;line-height:1.2;margin-top:6px}
@@ -379,7 +383,7 @@ body.r-perfil .fab,body.r-evaluacion .fab{display:none}
 .w-brand .hm{height:20px}.w-brand .sep{width:1px;height:20px;background:var(--line2)}
 .w-brand b{font-family:var(--font-display);font-weight:400;font-size:16px}.w-brand i{font-style:normal;color:var(--faint)}.w-brand .nv{height:13px}
 .w-step{margin:auto 0;max-width:520px;padding-block:48px 24px}
-@media (max-width:760px){.w-step{margin:0;padding-top:41vh !important}}
+@media (max-width:760px){.w-step{margin:0;padding-top:41vh !important}#w-q{padding-top:6vh !important}#w-q h1{font-size:2.1rem}.welcome.q .w-bg{opacity:.18}}
 .w-step h1{font-family:var(--font-display);font-size:clamp(2.4rem,6vw,4.2rem);line-height:1;letter-spacing:-.03em;margin-top:14px}
 .w-step h1 em{font-style:normal;color:var(--orange)}
 .w-sub{margin-top:16px;color:var(--dim);font-size:clamp(15px,1.5vw,17px);max-width:46ch}
@@ -392,6 +396,11 @@ body.r-perfil .fab,body.r-evaluacion .fab{display:none}
 .w-alt{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:18px}
 .w-link{background:none;border:0;padding:6px 0;color:var(--fg);font-weight:700;font-size:14px;text-decoration:underline;text-decoration-color:rgba(255,255,255,.3);text-underline-offset:4px}
 .w-skip{align-self:flex-start;background:none;border:0;padding:8px 0;color:var(--faint);font-size:13px}
+.w-form .ta{min-height:0;resize:none;font-size:16px;line-height:1.45}
+.w-me{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.w-me .av{width:56px;height:56px;font-size:18px}
+.w-me b{display:block;font-family:var(--font-display);font-weight:400;font-size:20px}
+.w-me span.s{display:block;font-size:13px;color:var(--faint)}
 .w-hint{font-size:13.5px;color:#f5d5c8;margin:2px 0 8px}
 .w-form #w-namebox{display:grid;gap:8px}
 .w-form #w-namebox[hidden]{display:none}
@@ -490,6 +499,20 @@ footer img{height:18px;width:auto}
         </div>
         <button class="btn lg" type="submit" id="w-go">Entrar</button>
         <p class="note warn" id="w-err" hidden></p>
+      </form>
+    </div>
+    <div class="w-step" id="w-q" hidden>
+      <div class="w-me" id="w-me"></div>
+      <p class="label">Dos preguntas rápidas</p>
+      <h1>Antes de arrancar, <em>cuéntanos.</em></h1>
+      <p class="w-sub">Esto aparece en tu tarjeta de la parrilla para que los demás sepan cómo ayudarte y en qué les puedes ayudar tú.</p>
+      <form id="w-qform" class="w-form" novalidate>
+        <label for="w-chal" class="w-lbl">¿Qué desafío tienes hoy en tu negocio?</label>
+        <textarea class="in ta" id="w-chal" maxlength="200" rows="3" placeholder="Ej.: escalar mi equipo de ventas, bajar el costo de la pauta, lanzar un evergreen…"></textarea>
+        <label for="w-help" class="w-lbl" style="margin-top:8px">¿En qué puedes ayudar a otros?</label>
+        <textarea class="in ta" id="w-help" maxlength="140" rows="2" placeholder="Ej.: lanzamientos, pauta en Meta, equipos de ventas…"></textarea>
+        <button class="btn lg" type="submit" id="w-go2">Entrar a la parrilla</button>
+        <p class="note warn" id="w-err2" hidden></p>
       </form>
     </div>
   </div>
@@ -995,7 +1018,7 @@ function card(p){
     <h3>${esc(p.name)}</h3>
     <div class="meta">${p.country ? `<span>${flag(p.country)} ${esc(p.country)}</span>` : ""}</div>
     <p class="bio">${esc(p.bio || p.project || "")}</p>
-    ${p.challenge ? `<p class="chal"><span>Desafío</span>${esc(p.challenge)}</p>` : ""}
+    ${p.challenge ? `<p class="chal"><span>Desafío</span>${esc(p.challenge)}</p>` : `<p class="chal empty" aria-hidden="true"><span>Desafío</span>—</p>`}
     <span class="go">Ver perfil <svg width="14" height="14"><use href="#i-arrow"/></svg></span>
   </article>`;
 }
@@ -1007,8 +1030,6 @@ function renderPeople(){
   let html = "";
   $("#join").innerHTML = q ? "" : !ME
     ? `<div class="join"><div><p class="label">Aún no estás en la parrilla</p><h3>Toma tu lugar en la parrilla.</h3><p>Solo escribe el @ de tu Instagram.</p></div><a class="btn" href="#" data-enter>Entrar</a></div>`
-    : !ME.challenge
-    ? `<div class="join"><div><p class="label">Ya estás en la parrilla</p><h3>Cuéntanos tu desafío.</h3><p>Así los demás saben en qué te pueden ayudar. Toma 30 segundos.</p></div><a class="btn" href="#perfil">Agregar mi desafío</a></div>`
     : "";
   html += list.map(card).join("");
   if (!list.length && q) html += `<div class="empty" style="grid-column:1/-1">No encontramos a nadie con “${esc($("#q").value)}”.</div>`;
@@ -1238,8 +1259,30 @@ function renderMe(){
 /* ===================== BIENVENIDA ===================== */
 const W = {
   open(){ $("#welcome").hidden = false; document.body.classList.add("w-open"); setTimeout(() => $("#w-ig").focus({ preventScroll:true }), 200); },
-  close(){ $("#welcome").hidden = true; document.body.classList.remove("w-open"); }
+  close(){ $("#welcome").hidden = true; document.body.classList.remove("w-open"); this.reset(); },
+  reset(){ $("#w-q").hidden = true; $("#welcome .w-step").hidden = false; $("#welcome").classList.remove("q"); },
+  questions(){
+    $("#welcome .w-step").hidden = true; $("#w-q").hidden = false; $("#welcome").classList.add("q");
+    $("#w-me").innerHTML = `${avatar(ME, "ring")}<div><b>${esc(ME.name)}</b><span class="s">@${esc(ME.ig)}</span></div>`;
+    $("#w-chal").value = ME.challenge || ""; $("#w-help").value = ME.help || "";
+    $("#welcome").scrollTop = 0; setTimeout(() => $("#w-chal").focus({ preventScroll:true }), 150);
+  }
 };
+$("#w-qform").addEventListener("submit", async e => {
+  e.preventDefault();
+  const chal = $("#w-chal").value.trim(), help = $("#w-help").value.trim(), er = $("#w-err2"), btn = $("#w-go2");
+  if (!chal){ er.textContent = "Cuéntanos tu desafío para entrar."; er.hidden = false; $("#w-chal").focus(); return; }
+  if (!help){ er.textContent = "Cuéntanos en qué puedes ayudar para entrar."; er.hidden = false; $("#w-help").focus(); return; }
+  er.hidden = true; btn.disabled = true; btn.innerHTML = `<span class="spin"></span>`;
+  try{
+    const r = await API.saveProfile({ ...ME, challenge: chal, help });
+    ME = { ...ME, ...(r.profile || {}), challenge: chal, help }; DRAFT = { ...ME }; store.set("pd_me", ME);
+    try{ PEOPLE = await API.profiles(); }catch(x){}
+    renderMe(); fillForm(); renderPeople(); W.close(); location.hash = "#quien";
+    toast(`Bienvenido, ${ME.name.split(" ")[0]}. Ya estás en la parrilla.`);
+  }catch(x){ er.textContent = "No pudimos guardar tus respuestas. Intenta de nuevo."; er.hidden = false; }
+  btn.disabled = false; btn.textContent = "Entrar a la parrilla";
+});
 const normIg = v => String(v || "").trim().replace(/^@/,"").replace(/^https?:\/\/(www\.)?instagram\.com\//i,"").replace(/[/?#].*$/,"").replace(/[^a-zA-Z0-9._]/g,"").toLowerCase();
 $("#w-ig").addEventListener("input", () => { $("#w-namebox").hidden = true; $("#w-err").hidden = true; });
 $("#w-form").addEventListener("submit", async e => {
@@ -1253,10 +1296,9 @@ $("#w-form").addEventListener("submit", async e => {
     const r = await API.login(ig, needName ? name : "");
     if (r.needName){ $("#w-namebox").hidden = false; setTimeout(() => $("#w-name").focus(), 50); }
     else {
-      ME = r.profile; DRAFT = { ...ME }; store.set("pd_me", ME);
-      try{ PEOPLE = await API.profiles(); }catch(x){}
-      renderMe(); fillForm(); renderPeople(); W.close(); location.hash = "#quien";
-      toast(r.created ? `Bienvenido, ${ME.name.split(" ")[0]}. Ya estás en la parrilla.` : `Hola de nuevo, ${ME.name.split(" ")[0]}.`);
+      ME = r.profile; DRAFT = { ...ME }; store.set("pd_me", ME); renderMe(); fillForm();
+      if (!ME.challenge || !ME.help) W.questions();
+      else { try{ PEOPLE = await API.profiles(); }catch(x){} renderPeople(); W.close(); location.hash = "#quien"; toast(`Hola de nuevo, ${ME.name.split(" ")[0]}.`); }
     }
   }catch(x){ er.textContent = x.message; er.hidden = false; }
   btn.disabled = false; btn.textContent = "Entrar";
@@ -1274,6 +1316,7 @@ $("#join").addEventListener("click", e => { if (e.target.closest("[data-enter]")
   try{ PEOPLE = await API.profiles(); }catch(e){ PEOPLE = []; }
   renderMe(); fillForm(); renderPeople(); renderMaterial(); renderStrip(); route();
   if (!ME && new URLSearchParams(location.search).get("welcome") !== "0") W.open();
+  else if (ME && (!ME.challenge || !ME.help)){ W.open(); W.questions(); }
   $("#wifi2").hidden = nowMX().day > DAYS[0].key;
   if (store.get("pd_eval_done", false)) showEvalDone(); else { loadDraft(); renderStrip(); }
   setInterval(() => { renderStrip(); if (location.hash === "#cronograma") renderDays(); }, 60000);
